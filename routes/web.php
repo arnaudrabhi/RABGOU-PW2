@@ -22,10 +22,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-
-Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
+// Routes Admin
+Route::middleware(['auth', 'role_id:1'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
+    });
 });
-
 
 require __DIR__.'/auth.php';
