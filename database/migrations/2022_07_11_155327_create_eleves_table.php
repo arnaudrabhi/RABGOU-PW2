@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('prenom', 25);
             $table->string('nom', 25);
             $table->foreignIdFor(Classe::class)->nullable();
+            $table->rememberToken();
             $table->timestamps();
         });
     }
