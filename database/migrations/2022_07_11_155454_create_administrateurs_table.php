@@ -16,11 +16,8 @@ return new class extends Migration
         Schema::create('administrateurs', function (Blueprint $table) {
             $table->id();
             $table->string('civ', 2);
-            $table->string('nom', 25);
             $table->string('prenom', 25);
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->string('nom', 25);
             $table->timestamps();
         });
     }
