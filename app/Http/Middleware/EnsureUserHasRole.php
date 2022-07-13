@@ -14,9 +14,10 @@ class EnsureUserHasRole
      * @param  \Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
      * @return \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
      */
-    public function handle(Request $request, Closure $next, int $role_id)
+    public function handle(Request $request, Closure $next, int $role)
     {
-        if ($request->user()->role_id === $role_id) {
+        //Ici l'id correspond a l'id_role
+        if ($request->user()->roles()->where('id', $role)->exists()) {
             return $next($request);
         }
         abort(403);
