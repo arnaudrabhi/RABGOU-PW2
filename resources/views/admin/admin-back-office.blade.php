@@ -1,3 +1,6 @@
+@extends('layouts.default-layout')
+
+@section('content')
 <div>
     <table>
         <thead>
@@ -20,3 +23,4 @@
         </tbody>
     </table>
 </div>
+@endsection
