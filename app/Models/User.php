@@ -12,6 +12,11 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    const ADMINISTRATEUR = 1;
+    const ADMINISTRATION = 2;
+    const ENSEIGNANT = 3;
+    const ELEVE = 4;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +28,7 @@ class User extends Authenticatable
         'prenom',
         'email',
         'password',
-        'role'
+        'role',
     ];
 
     /**
@@ -45,7 +50,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
+    public function roles() {
         return $this->belongsToMany(Role::class);
+    }
+
+    public function getRole(): int
+    {
+        return match ($this->role) {
+            1 => User::ADMINISTRATEUR,
+            2 => User::ADMINISTRATION,
+            3 => User::ENSEIGNANT,
+            default => User::ELEVE,
+        };
+    }
+
+    /**
+     * @param $roleEnum
+     * User::ADMINISTRATEUR, User::ADMINISTRATION, User::ENSEIGNANT, User::ELEVE
+     * @return bool
+     */
+    public function isRole($roleEnum): bool
+    {
+        if ($roleEnum == $this->role) {
+            return true;
+        }
+        return false;
     }
 }
