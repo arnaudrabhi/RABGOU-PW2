@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // User
+        // 25 random User
         User::factory(25)->create();
 
         // Roles
