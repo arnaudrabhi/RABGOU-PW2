@@ -29,4 +29,10 @@ Route::middleware(['auth', 'role_id:1'])->group(function () {
     });
 });
 
+// Routes Administration
+Route::middleware(['auth', 'role_id:2'])->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'showAdministrationMenu']);
+});
+
+
 require __DIR__.'/auth.php';
