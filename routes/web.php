@@ -23,7 +23,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 // Routes Admin
-Route::middleware(['auth', 'role_id:1'])->group(function () {
+Route::middleware(['auth', 'role:1'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
     });

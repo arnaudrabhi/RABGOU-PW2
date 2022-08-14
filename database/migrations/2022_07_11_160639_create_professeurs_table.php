@@ -13,13 +13,6 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('professeurs', function (Blueprint $table) {
-            $table->id();
-            $table->string('civ', 2);
-            $table->string('prenom', 25);
-            $table->string('nom', 25);
-            $table->timestamps();
-        });
     }
 
     /**

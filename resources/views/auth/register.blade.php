@@ -12,11 +12,31 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
 
-            <!-- Name -->
+            <!-- Civilite -->
             <div>
-                <x-label for="name" :value="__('Name')" />
+                <x-label for="civilite" :value="__('Civilite')" />
 
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <select id="civilite" name="civilite" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required autofocus>
+                    <option value="">...</option>
+                    <option value="Mr">Mr</option>
+                    <option value="Mme">Mme</option>
+                    <option value="Mlle">Mlle</option>
+                </select>
+
+            </div>
+
+            <!-- Nom -->
+            <div>
+                <x-label for="nom" :value="__('Nom')" />
+
+                <x-input id="nom" class="block mt-1 w-full" type="text" name="nom" :value="old('nom')" required autofocus />
+            </div>
+
+            <!-- Prénom -->
+            <div>
+                <x-label for="prenom" :value="__('Prenom')" />
+
+                <x-input id="prenom" class="block mt-1 w-full" type="text" name="prenom" :value="old('prenom')" required autofocus />
             </div>
 
             <!-- Email Address -->

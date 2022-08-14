@@ -2,17 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Eleve;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends Factory
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Role>
  */
-class eleveFactory extends Factory
+class RoleFactory extends Factory
 {
-
-    protected $model = Eleve::class;
-
     /**
      * Define the model's default state.
      *
@@ -21,9 +17,7 @@ class eleveFactory extends Factory
     public function definition()
     {
         return [
-            'civ' => $this->faker->title(),
-            'nom' => $this->faker->firstName(),
-            'prenom' => $this->faker->lastName()
+            //
         ];
     }
 }

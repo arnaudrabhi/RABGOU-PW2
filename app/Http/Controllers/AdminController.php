@@ -2,13 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Eleve;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
     function showAdminMenu() {
-        $eleves = Eleve::all();
+        $eleves = User::where('role', '=', '4')->get();
         return view('admin.admin-back-office', compact('eleves'));
     }
 }

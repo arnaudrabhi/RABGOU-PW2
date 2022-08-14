@@ -14,14 +14,6 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('eleves', function (Blueprint $table) {
-            $table->id();
-            $table->string('civ', 10);
-            $table->string('prenom', 25);
-            $table->string('nom', 25);
-            $table->foreignIdFor(Classe::class)->nullable();
-            $table->timestamps();
-        });
     }
 
     /**
