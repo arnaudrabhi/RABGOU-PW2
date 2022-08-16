@@ -22,17 +22,17 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
+
+
 // Routes Admin
-Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
-    });
+Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function() {
+    Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
 });
 
 // Routes Administration
-Route::middleware(['auth', 'role_id:2'])->group(function () {
-    Route::get('/dashboard', [AdminController::class, 'showAdministrationMenu']);
-});
+Route::group(['prefix' => 'administration', 'middleware' => ['auth']], function() {
+});        Route::get('/dashboard', [AdminController::class, 'showAdministrationMenu']);
+
 
 
 require __DIR__.'/auth.php';
