@@ -30,7 +30,7 @@ Route::middleware(['auth', 'role:1'])->group(function () {
 });
 
 // Routes Administration
-Route::middleware(['auth', 'role_id:2'])->group(function () {
+Route::middleware(['auth', 'role:2'])->group(function () {
     Route::get('/dashboard', [AdminController::class, 'showAdministrationMenu']);
 });
 
