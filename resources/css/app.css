@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --bgcolor-admin: #ff0000;
+    --bgcolor-administration: #ffa500;
+    --bgcolor-enseignant: #008000;
+    --bgcolor-eleve: rgba(0, 102, 255, 0.83);
+}
+

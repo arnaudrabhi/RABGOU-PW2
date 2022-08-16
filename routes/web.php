@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\EleveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,16 +24,20 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 // Routes Admin
-Route::middleware(['auth', 'role:1'])->group(function () {
-    Route::prefix('admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
-    });
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1']], function() {
+    Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
 });
 
 // Routes Administration
-Route::middleware(['auth', 'role:2'])->group(function () {
+Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']], function() {
     Route::get('/dashboard', [AdminController::class, 'showAdministrationMenu']);
 });
+
+// Routes creation user
+Route::group(['prefix' => 'crud', 'middleware' => ['auth', 'role:1']], function() {
+    Route::post('/neweleve', [EleveController::class, 'create']);
+});
+
 
 
 require __DIR__.'/auth.php';

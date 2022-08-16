@@ -1,6 +1,24 @@
+<?php
+use Illuminate\Support\Facades\Auth as Auth;
+    $color = "#d14747";
+    switch (Auth::user()->role) {
+        case "1":
+            $color = "#d14747";
+            break;
+        case "2":
+            $color = "orange";
+            break;
+        case "3":
+            $color = "green";
+            break;
+        case "4":
+        default:
+            $color = 'rgba(0, 102, 255, 0.83)';
+    }
+    ?>
 @section('topbar')
     <div id="topbar">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <nav class="navbar navbar-expand-lg navbar-light" style="background-color: {{ $color }}">
             <a class="navbar-brand" href="#">Navbar</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
