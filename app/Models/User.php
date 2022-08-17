@@ -54,6 +54,12 @@ class User extends Authenticatable
         return $this->belongsToMany(Role::class);
     }
 
+    public function eleve() {
+        if ($this->getRole() == User::ELEVE) {
+            return $this->belongsTo(Eleve::class);
+        }
+    }
+
     public function getRole(): int
     {
         return match ($this->role) {

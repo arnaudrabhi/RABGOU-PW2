@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\EleveController;
+use App\Http\Controllers\API\PostEleveController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,8 +34,11 @@ Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']],
 });
 
 // Routes creation user
-Route::group(['prefix' => 'crud', 'middleware' => ['auth', 'role:1']], function() {
-    Route::post('/neweleve', [EleveController::class, 'create']);
+Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1']], function() {
+    Route::post('/add', [PostEleveController::class, 'add']);
+    Route::get('/edit/{id}', [PostEleveController::class, 'edit']);
+    Route::post('/update/{id}', [PostEleveController::class, 'update']);
+    Route::delete('/delete/{id}', [PostEleveController::class, 'delete']);
 });
 
 
