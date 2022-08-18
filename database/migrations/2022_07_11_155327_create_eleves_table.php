@@ -17,6 +17,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('eleves', function (Blueprint $table) {
+            $table->id();
             $table->foreignIdFor(User::class);
             $table->string('moyenne');
         });

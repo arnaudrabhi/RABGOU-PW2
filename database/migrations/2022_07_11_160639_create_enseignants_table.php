@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Enseignant;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,6 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::create('enseignants', function (Blueprint $table) {
+            $table->foreignIdFor(User::class);
+            $table->timestamps();
+        });
     }
 
     /**
@@ -22,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('professeurs');
+        Schema::dropIfExists('enseignants');
     }
 };

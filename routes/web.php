@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\PostEleveController;
+use App\Http\Controllers\API\PostEnseignantController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,21 +25,29 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 // Routes Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1']], function() {
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
 });
 
 // Routes Administration
 Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']], function() {
-    Route::get('/dashboard', [AdminController::class, 'showAdministrationMenu']);
+    Route::get('/dashboard', [AdministrationController::class, 'showAdministrationMenu']);
 });
 
 // Routes creation user
-Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1']], function() {
+Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::post('/add', [PostEleveController::class, 'add']);
     Route::get('/edit/{id}', [PostEleveController::class, 'edit']);
     Route::post('/update/{id}', [PostEleveController::class, 'update']);
     Route::delete('/delete/{id}', [PostEleveController::class, 'delete']);
+});
+
+// Routes creation enseignant
+Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], function() {
+    Route::post('/add', [PostEnseignantController::class, 'add']);
+    Route::get('/edit/{id}', [PostEnseignantController::class, 'edit']);
+    Route::post('/update/{id}', [PostEnseignantController::class, 'update']);
+    Route::delete('/delete/{id}', [PostEnseignantController::class, 'delete']);
 });
 
 

@@ -4,19 +4,19 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use App\Models\Eleve;
+use App\Models\Enseignant;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
-class PostEleveController extends Controller
+class PostEnseignantController extends Controller
 {
     /**
      * @return array
      */
     public function index(): array
     {
-        $posts = Eleve::all()->toArray();
+        $posts = Enseignant::all()->toArray();
         return array_reverse($posts);
     }
 
@@ -33,23 +33,23 @@ class PostEleveController extends Controller
             'email' => $request->input('email'),
             // TODO : Retirer le mot de passe par défaut
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Mot de passe = 'password'
-            'role' => 4
+            'role' => 2
         ]);
 
         if(!$user->save()) {
-            return abort(500, 'L\'élève n\'a pas pu être enregistré (user)');
+            return abort(500, 'L\'enseignant n\'a pas pu être enregistré (user)');
         }
-        $user->refresh();
+        $enseignantID = $user->refresh()->id;
 
-        $eleve = new Eleve([
-            'user_id' => $user->id
+        $enseignant = new Enseignant([
+            'user_id' => $enseignantID
         ]);
 
-        if(!$eleve->save()) {
-            return abort(500, 'L\'élève n\'a pas pu être enregistré (eleve)');
+        if(!$enseignant->save()) {
+            return abort(500, 'L\'enseignant n\'a pas pu être enregistré (enseignant)');
         }
 
-        return response()->json('L\'élève a bien été crée !');
+        return response()->json('L\'enseignant a bien été crée !');
     }
 
     /**
@@ -58,8 +58,8 @@ class PostEleveController extends Controller
      */
     public function edit($id): JsonResponse
     {
-        $post = Eleve::find($id);
-        return response()->json($post);
+        $enseignant = Enseignant::find($id);
+        return response()->json($enseignant);
     }
 
     /**
@@ -69,10 +69,10 @@ class PostEleveController extends Controller
      */
     public function update($id, Request $request): JsonResponse
     {
-        $post = Eleve::find($id);
-        $post->update($request->all());
+        $enseignant = Enseignant::find($id);
+        $enseignant->update($request->all());
 
-        return response()->json('L\'élève a bien été mis à jour !');
+        return response()->json('L\'enseignant a bien été mis à jour !');
     }
 
     /**
@@ -81,10 +81,10 @@ class PostEleveController extends Controller
      */
     public function delete($id): JsonResponse
     {
-        $post = Eleve::find($id);
-        $post->delete();
+        $enseignant = Enseignant::find($id);
+        $enseignant->delete();
 
-        return response()->json('L\'élève a bien été supprimé !');
+        return response()->json('L\'enseignant a bien été supprimé !');
     }
 }
 

@@ -13,15 +13,17 @@ class EnsureUserHasRole
      * Handle an incoming request.
      *
      * @param Request $request
-     * @param Closure(\Illuminate\Http\Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
-     * @param int $role
+     * @param Closure $next
+     * @param string|array $roles
      * @return Response|RedirectResponse
      */
-    public function handle(Request $request, Closure $next, int $role)
+    public function handle(Request $request, Closure $next, ...$roles): Response|RedirectResponse
     {
-        // Ici l'id correspond a l'id_role
-        if ($request->user()->role == $role) {
-            return $next($request);
+        // $roles est un array
+        foreach ($roles as $role) {
+            if ($request->user()->role == $role) {
+                return $next($request);
+            }
         }
         abort(403);
     }
