@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Eleve;
 use App\Models\Enseignant;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
@@ -14,10 +13,10 @@ class PostEnseignantController extends Controller
     /**
      * @return array
      */
-    public function index(): array
+    public function index(): JsonResponse
     {
         $posts = Enseignant::all()->toArray();
-        return array_reverse($posts);
+        return response()->json(json_encode(array_reverse($posts)));
     }
 
     /**
@@ -33,16 +32,16 @@ class PostEnseignantController extends Controller
             'email' => $request->input('email'),
             // TODO : Retirer le mot de passe par défaut
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Mot de passe = 'password'
-            'role' => 2
+            'role' => 3
         ]);
 
         if(!$user->save()) {
             return abort(500, 'L\'enseignant n\'a pas pu être enregistré (user)');
         }
-        $enseignantID = $user->refresh()->id;
+        $user->refresh();
 
         $enseignant = new Enseignant([
-            'user_id' => $enseignantID
+            'user_id' => $user->id
         ]);
 
         if(!$enseignant->save()) {

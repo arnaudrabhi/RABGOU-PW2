@@ -34,8 +34,10 @@ Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']],
     Route::get('/dashboard', [AdministrationController::class, 'showAdministrationMenu']);
 });
 
+Route::get('eleves/all', [PostEleveController::class, 'index']);
 // Routes creation user
 Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
+
     Route::post('/add', [PostEleveController::class, 'add']);
     Route::get('/edit/{id}', [PostEleveController::class, 'edit']);
     Route::post('/update/{id}', [PostEleveController::class, 'update']);

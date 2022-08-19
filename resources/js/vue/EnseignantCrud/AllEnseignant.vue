@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h3 class="text-center">Tous les élèves</h3><br/>
+        <h3 class="text-center">All Posts</h3><br/>
 
         <table class="table table-bordered">
             <thead>
@@ -14,14 +14,16 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="eleve in eleves" :key="eleve.id">
+            <tr v-for="eleve in posts" :key="eleve.id">
                 <td>{{ eleve.id }}</td>
-                <td>{{ eleve.civ }}</td>
-                <td>{{ eleve.nom }}</td>
-                <td>{{ eleve.prenom }}</td>
-                <td>{{ eleve.moyenne }}</td>
+                <td>{{ eleve.title }}</td>
+                <td>{{ eleve.description }}</td>
+                <td>{{ eleve.created_at }}</td>
+                <td>{{ eleve.updated_at }}</td>
                 <td>
                     <div class="btn-group" role="group">
+                        <router-link :to="{name: 'edit', params: { id: eleve.id }}" class="btn btn-primary">Edit
+                        </router-link>
                         <button class="btn btn-danger" @click="deletePost(eleve.id)">Delete</button>
                     </div>
                 </td>
@@ -35,23 +37,23 @@
 export default {
     data() {
         return {
-            eleves: []
+            posts: []
         }
     },
     created() {
         this.axios
-            .get('http://localhost/RABGOU-PW2/public/eleves/all')
+            .get('http://localhost:8000/api/posts')
             .then(response => {
-                this.eleves = response.data;
+                this.posts = response.data;
             });
     },
     methods: {
         deletePost(id) {
             this.axios
-                .delete(`http://localhost/RABGOU-PW2/public/eleves/delete/${id}`)
+                .delete(`http://localhost:8000/api/eleve/delete/${id}`)
                 .then(response => {
-                    let i = this.eleves.map(item => item.id).indexOf(id); // find index of object
-                    this.eleves.splice(i, 1)
+                    let i = this.posts.map(item => item.id).indexOf(id); // find index of object
+                    this.posts.splice(i, 1)
                 });
         }
     }

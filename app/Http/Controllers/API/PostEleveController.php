@@ -16,8 +16,14 @@ class PostEleveController extends Controller
      */
     public function index(): array
     {
-        $posts = Eleve::all()->toArray();
-        return array_reverse($posts);
+        $eleves = Eleve::all();
+        $tab = [];
+        foreach ($eleves as $key => $eleve) {
+
+            $tab[] = array_merge($eleve->toArray(), $eleve->user->toArray());
+        }
+
+        return array_reverse($tab);
     }
 
     /**
@@ -39,10 +45,9 @@ class PostEleveController extends Controller
         if(!$user->save()) {
             return abort(500, 'L\'élève n\'a pas pu être enregistré (user)');
         }
-        $user->refresh();
 
         $eleve = new Eleve([
-            'user_id' => $user->id
+            'user_id' => $user->refresh()->id
         ]);
 
         if(!$eleve->save()) {
@@ -81,8 +86,10 @@ class PostEleveController extends Controller
      */
     public function delete($id): JsonResponse
     {
-        $post = Eleve::find($id);
-        $post->delete();
+        $user = User::find($id);
+        $eleve = Eleve::where('user_id', "=", $id)->first();
+        $user->delete();
+        $eleve->delete();
 
         return response()->json('L\'élève a bien été supprimé !');
     }

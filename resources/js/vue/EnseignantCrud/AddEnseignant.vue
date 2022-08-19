@@ -1,14 +1,15 @@
 <template>
     <div>
         <h3 class="text-center">Ajouter un élève</h3>
-        <div>
+        <div class="row">
+            <div class="col-md-6">
 
                 <form @submit.prevent="addPost">
                     <div class="form-group">
                         <label>Civilité</label>
                         <input type="text" class="form-control" v-model="form.civ">
                     </div>
-
+é
                     <div class="form-group">
                         <label>Nom</label>
                         <input type="text" class="form-control" v-model="form.nom">
@@ -27,6 +28,7 @@
                     <button type="submit" class="btn btn-primary">Ajouter élève</button>
                 </form>
 
+            </div>
         </div>
     </div>
 </template>
@@ -46,7 +48,7 @@ export default {
     methods: {
         addPost() {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/eleves/add', this.form)
+                .post('http://localhost/RABGOU-PW2/public/enseignants/add', this.form)
                 .then(response => (
                     console.log(response.data)
                 ))
