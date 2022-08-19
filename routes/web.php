@@ -3,6 +3,8 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\PostEleveController;
 use App\Http\Controllers\API\PostEnseignantController;
+use App\Models\Classe;
+use App\Models\Groupe;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -54,5 +56,22 @@ Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], 
 });
 
 
+/*
+Route::get('/testgroupe', function () {
+   $classe = new Classe([
+       'nom' => 'classe 1'
+   ]);
+   $groupe = new Groupe([
+       'libelle' => 'groupe1'
+   ]);
+
+   $classe->save();
+   $groupe->save();
+
+   $classe->groupes()->attach($groupe);
+
+   $classe->save();
+});
+*/
 
 require __DIR__.'/auth.php';

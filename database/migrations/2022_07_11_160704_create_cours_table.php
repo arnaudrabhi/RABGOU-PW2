@@ -16,9 +16,9 @@ return new class extends Migration
         Schema::create('cours', function (Blueprint $table) {
             $table->id();
             $table->string('matiere', 25);
-            $table->dateTime('heure_debut');
-            $table->dateTime('heure_fin');
-            $table->time('duree');
+            $table->dateTime('date_heure_debut');
+            $table->dateTime('date_heure_fin');
+            $table->integer('duree_minutes');
             $table->integer('statut')->default('0');
             $table->timestamps();
         });
