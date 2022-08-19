@@ -1,5 +1,5 @@
 <script>
-import AddEleve from "@/vue/EleveCrud/AddEleve.vue";
+import AddEleve from "@/vue/Eleve/EleveForm.vue";
 
 export default {
     data() {

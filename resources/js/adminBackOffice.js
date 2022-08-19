@@ -1,10 +1,10 @@
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-import AppEleve from './vue/EleveCrud/AppEleve.vue'
-import AddEleve from "./vue/EleveCrud/AddEleve.vue";
-// import EditEleve from "./vue/EleveCrud/EditEleve";
-import AllEleve from "./vue/EleveCrud/AllEleve.vue";
+import AppEleve from './vue/Eleve/EleveView.vue'
+import AddEleve from "./vue/Eleve/EleveForm.vue";
+// import EditEleve from "./vue/Eleve/EditEleve";
+import AllEleve from "./vue/Eleve/EleveTable.vue";
 
 
 import { createApp } from 'vue';
