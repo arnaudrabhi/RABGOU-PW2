@@ -19,6 +19,7 @@ return new class extends Migration
         Schema::create('eleves', function (Blueprint $table) {
             $table->foreignIdFor(User::class);
             $table->string('moyenne')->nullable();
+            $table->integer('statut')->default('1');
             $table->timestamps();
         });
     }

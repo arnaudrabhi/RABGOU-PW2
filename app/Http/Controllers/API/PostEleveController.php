@@ -17,13 +17,12 @@ class PostEleveController extends Controller
     public function index(): array
     {
         $eleves = Eleve::all();
-        $tab = [];
+        $eleveArray = [];
         foreach ($eleves as $key => $eleve) {
-
-            $tab[] = array_merge($eleve->toArray(), $eleve->user->toArray());
+            $eleveArray[] = array_merge($eleve->toArray(), $eleve->user->toArray());
         }
 
-        return array_reverse($tab);
+        return array_reverse($eleveArray);
     }
 
     /**
@@ -77,7 +76,10 @@ class PostEleveController extends Controller
         $post = Eleve::find($id);
         $post->update($request->all());
 
-        return response()->json('L\'élève a bien été mis à jour !');
+        return response()->json([
+            'message' => 'L\'élève a bien été mis à jour !',
+            'eleve' => $post
+        ]);
     }
 
     /**
@@ -91,7 +93,10 @@ class PostEleveController extends Controller
         $user->delete();
         $eleve->delete();
 
-        return response()->json('L\'élève a bien été supprimé !');
+        return response()->json([
+            'message' => 'L\'élève a bien été supprimé !',
+            'ok' => true
+        ]);
     }
 }
 

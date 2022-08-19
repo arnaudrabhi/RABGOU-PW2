@@ -17,6 +17,7 @@ return new class extends Migration
     {
         Schema::create('enseignants', function (Blueprint $table) {
             $table->foreignIdFor(User::class);
+            $table->integer('statut')->default('1');
             $table->timestamps();
         });
     }

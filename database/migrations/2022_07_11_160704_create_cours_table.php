@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('heure_debut');
             $table->dateTime('heure_fin');
             $table->time('duree');
+            $table->integer('statut')->default('0');
             $table->timestamps();
         });
     }

@@ -9,3 +9,9 @@
     --bgcolor-eleve: rgba(0, 102, 255, 0.83);
 }
 
+
+.div {
+    border: #1a202c;
+    border-width: 2px;
+}
+

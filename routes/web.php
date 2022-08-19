@@ -17,8 +17,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('home');
+})->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -31,11 +31,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1,2']], functi
 
 // Routes Administration
 Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']], function() {
-    Route::get('/dashboard', [AdministrationController::class, 'showAdministrationMenu']);
+    Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
 });
 
-Route::get('eleves/all', [PostEleveController::class, 'index']);
 // Routes creation user
+Route::get('eleves/all', [PostEleveController::class, 'index']);
+
 Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
 
     Route::post('/add', [PostEleveController::class, 'add']);
