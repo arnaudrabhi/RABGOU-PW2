@@ -1,7 +1,7 @@
 @extends('layouts.default-layout')
 
 @section('head')
-    @vite(['resources/js/adminBackOffice.js', 'resources/js/vue/EleveCrud/AppEleve.vue'])
+    @vite(['resources/js/adminBackOffice.js', 'resources/js/vue/Eleve/EleveView.vue'])
 @endsection
 
 

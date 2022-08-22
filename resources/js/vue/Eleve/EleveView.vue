@@ -1,23 +1,3 @@
-<script>
-import AddEleve from "@/vue/Eleve/EleveForm.vue";
-
-export default {
-    data() {
-        return {
-            showAddEleve: false
-        }
-    },
-    methods: {
-        renderAddEleve() {
-            this.showAddEleve = !this.showAddEleve;
-        },
-        renderAllEleve() {
-
-        }
-    }
-
-}
-</script>
 <template>
     <div class="container">
         <div class="text-center" style="margin: 20px 0px 20px 0px;">
@@ -30,7 +10,9 @@ export default {
                 <div class="col">
                     <p><button @click="renderAddEleve">Ajouter un élève</button></p>
                     <add-eleve
-                        v-if="showAddEleve">
+                        v-if="showFormEleve"
+                        :idEleve=idEleveToEdit
+                        :editEleve=editEleveInForm>
                     </add-eleve>
                 </div>
                 <div class="col">
@@ -39,12 +21,45 @@ export default {
             </div>
 
             <div>
-                <all-eleve></all-eleve>
+                <all-eleve
+                    v-if="showListEleve"
+                    @editEleve='renderEditEleve($event)'>
+                </all-eleve>
             </div>
 
         </div>
         <br/>
     </div>
 </template>
+<script>
+import AddEleve from "@/vue/Eleve/EleveForm.vue";
+
+export default {
+    data() {
+        return {
+            showFormEleve: false,
+            editEleveInForm: true,
+            showListEleve: true,
+            eleve: '',
+        }
+    },
+    methods: {
+        renderAddEleve() {
+            this.showListEleve = !this.showListEleve;
+            this.showFormEleve = !this.showFormEleve;
+            this.editEleveInForm = true;
+        },
+        renderAllEleve() {
+
+        },
+        renderEditEleve(eleve) {
+            this.eleve = eleve;
+            this.showListEleve = false;
+            this.showFormEleve = !this.showFormEleve;
+            this.editEleveInForm = false;
+        }
+    }
+}
+</script>
 
 

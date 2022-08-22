@@ -22,7 +22,10 @@
                 <td>{{ eleve.moyenne }}</td>
                 <td>
                     <div class="btn-group" role="group">
-                        <button class="btn btn-danger" @click="deletePost(eleve.id)">Delete</button>
+                        <button class="btn btn-danger" @click="deletePost(eleve.id)">Supprimer</button>
+                    </div>
+                    <div class="btn-group" role="group">
+                        <button class="btn btn-light" @click="editEleve(eleve.id)">Modif.</button>
                     </div>
                 </td>
             </tr>
@@ -32,7 +35,11 @@
 </template>
 
 <script>
+import {filter} from "lodash/collection";
+
 export default {
+    props: ['editEleve'],
+
     data() {
         return {
             eleves: []
@@ -53,6 +60,10 @@ export default {
                     let i = this.eleves.map(item => item.id).indexOf(id); // find index of object
                     this.eleves.splice(i, 1)
                 });
+        },
+        editEleve(id) {
+            this.$emit('editEleve', this.eleves.filter(e => e.user_id === id));
+
         }
     }
 }
