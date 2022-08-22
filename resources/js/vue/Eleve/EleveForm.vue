@@ -6,22 +6,22 @@
                 <form @submit.prevent="sendPost">
                     <div class="form-group">
                         <label>Civilité</label>
-                        <input type="text" class="form-control" v-model="form.civ">
+                        <input type="text" class="form-control" v-model="eleve.civ">
                     </div>
 
                     <div class="form-group">
                         <label>Nom</label>
-                        <input type="text" class="form-control" v-model="form.nom">
+                        <input type="text" class="form-control" v-model="eleve.nom">
                     </div>
 
                     <div class="form-group">
                         <label>Prenom</label>
-                        <input type="text" class="form-control" v-model="form.prenom">
+                        <input type="text" class="form-control" v-model="eleve.prenom">
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" v-model="form.email">
+                        <input type="email" class="form-control" v-model="eleve.email">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Ajouter élève</button>
@@ -39,10 +39,10 @@ export default {
         return {
             createNew: false,
             form: {
-                civ: "",
-                nom: "",
-                prenom:"",
-                email:""
+                civ: this.eleve.civ,
+                nom: this.eleve.nom,
+                prenom: this.eleve.prenom,
+                email: this.eleve.email
             },
         }
     },
@@ -51,7 +51,7 @@ export default {
             if (this.editEleveInForm) {
                 this.addPost();
             } else {
-                this.editPost(this.idEleveToEdit)
+                this.editPost(this.eleve.id)
             }
         },
         addPost() {
@@ -72,8 +72,5 @@ export default {
                 .catch(error => console.log(error))
         }
     },
-    watch: {
-
-    }
 }
 </script>

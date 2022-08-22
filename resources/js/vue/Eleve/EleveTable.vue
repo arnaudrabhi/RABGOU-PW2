@@ -38,7 +38,7 @@
 import {filter} from "lodash/collection";
 
 export default {
-    props: ['editEleve'],
+    props: ['eleve'],
 
     data() {
         return {
@@ -62,7 +62,7 @@ export default {
                 });
         },
         editEleve(id) {
-            this.$emit('editEleve', this.eleves.filter(e => e.user_id === id));
+            this.$emit('editEleve', this.eleves.filter(e => e.user_id === id)[0]);
 
         }
     }

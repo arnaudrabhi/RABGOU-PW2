@@ -11,7 +11,7 @@
                     <p><button @click="renderAddEleve">Ajouter un élève</button></p>
                     <add-eleve
                         v-if="showFormEleve"
-                        :idEleve=idEleveToEdit
+                        :eleve=eleve
                         :editEleve=editEleveInForm>
                     </add-eleve>
                 </div>
@@ -48,6 +48,7 @@ export default {
             this.showListEleve = !this.showListEleve;
             this.showFormEleve = !this.showFormEleve;
             this.editEleveInForm = true;
+            this.eleve = '';
         },
         renderAllEleve() {
 
