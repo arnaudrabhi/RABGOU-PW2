@@ -1,20 +1,19 @@
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 
-import AppEleve from './vue/Eleve/EleveView.vue'
-import AddEleve from "./vue/Eleve/EleveForm.vue";
-// import EditEleve from "./vue/Eleve/EditEleve";
-import AllEleve from "./vue/Eleve/EleveTable.vue";
+import EleveView from './vue/Eleve/EleveView.vue'
+import EleveForm from "./vue/Eleve/EleveForm.vue";
+import EleveTable from "./vue/Eleve/EleveTable.vue";
 
 
 import { createApp } from 'vue';
 
 const app = createApp();
 
-app.component('AppEleve', AppEleve)
-    .component('AddEleve', AddEleve)
-    .component('AllEleve', AllEleve);
+app.component('EleveView', EleveView)
+    .component('EleveForm', EleveForm)
+    .component('EleveTable', EleveTable);
 app.use(VueAxios, axios);
-app.mount('#AppEleve');
+app.mount('#EleveView');
 
 

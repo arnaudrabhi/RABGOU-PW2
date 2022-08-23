@@ -38,6 +38,7 @@ export default {
     data() {
         return {
             createNew: false,
+            
             form: {
                 civ: this.eleve.civ,
                 nom: this.eleve.nom,

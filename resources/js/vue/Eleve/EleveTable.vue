@@ -1,15 +1,16 @@
 <template>
-    <div>
+    <div class="container-sm">
         <h3 class="text-center">Tous les élèves</h3><br/>
 
-        <table class="table table-bordered">
+        <table v-if="showTable" class="table table-bordered">
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Title</th>
-                <th>Description</th>
-                <th>Created At</th>
-                <th>Updated At</th>
+                <th>Civilité</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Moyenne</th>
+                <th>Classe</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -19,13 +20,15 @@
                 <td>{{ eleve.civ }}</td>
                 <td>{{ eleve.nom }}</td>
                 <td>{{ eleve.prenom }}</td>
+                <td>{{ eleve.classe }}</td>
                 <td>{{ eleve.moyenne }}</td>
-                <td>
+                <td class="">
                     <div class="btn-group" role="group">
                         <button class="btn btn-danger" @click="deletePost(eleve.id)">Supprimer</button>
                     </div>
+                    &nbsp
                     <div class="btn-group" role="group">
-                        <button class="btn btn-light" @click="editEleve(eleve.id)">Modif.</button>
+                        <button class="btn btn-primary" @click="editEleve(eleve.id)">Modif.</button>
                     </div>
                 </td>
             </tr>
@@ -42,7 +45,8 @@ export default {
 
     data() {
         return {
-            eleves: []
+            eleves: [],
+            showTable: false
         }
     },
     created() {
@@ -50,6 +54,7 @@ export default {
             .get('http://localhost/RABGOU-PW2/public/eleves/all')
             .then(response => {
                 this.eleves = response.data;
+                this.showTable = true;
             });
     },
     methods: {
@@ -65,6 +70,6 @@ export default {
             this.$emit('editEleve', this.eleves.filter(e => e.user_id === id)[0]);
 
         }
-    }
+    },
 }
 </script>

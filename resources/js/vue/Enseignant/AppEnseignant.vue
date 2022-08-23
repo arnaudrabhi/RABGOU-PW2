@@ -1,15 +1,15 @@
 <script>
-import AddEleve from "@/vue/Eleve/EleveForm.vue";
+import EleveForm from "@/vue/Eleve/EleveForm.vue";
 
 export default {
     data() {
         return {
-            showAddEleve: false
+            showEleveForm: false
         }
     },
     methods: {
-        renderAddEleve() {
-            this.showAddEleve = !this.showAddEleve;
+        renderEleveForm() {
+            this.showEleveForm = !this.showEleveForm;
         }
     }
 
@@ -19,9 +19,9 @@ export default {
     <div class="container">
         <div class="text-center" style="margin: 20px 0px 20px 0px;">
             <span class="text-secondary">Élèves</span>
-            <button @click="renderAddEleve">Ajouter un élève</button>
+            <button @click="renderEleveForm">Ajouter un élève</button>
             <add-eleve
-            v-if="showAddEleve">
+            v-if="showEleveForm">
             </add-eleve>
 
         </div>

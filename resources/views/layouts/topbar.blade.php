@@ -37,7 +37,6 @@ use Illuminate\Support\Facades\Auth as Auth;
                 </li>
             </ul>
             <span class="navbar-text">
-            Bonjour,<br />
             {{ Illuminate\Support\Facades\Auth::user()->civ }}
             {{ Illuminate\Support\Facades\Auth::user()->nom }}
             {{ Illuminate\Support\Facades\Auth::user()->prenom }}
