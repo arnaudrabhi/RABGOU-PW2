@@ -81,6 +81,17 @@ class User extends Authenticatable
         };
     }
 
+    public function getRoleLib(): string
+    {
+        return match ($this->role) {
+            1 => "Admin",
+            2 => "Administration",
+            3 => "Enseignant",
+            default => "élève",
+        };
+
+    }
+
     /**
      * @param $roleEnum
      * User::ADMINISTRATEUR, User::ADMINISTRATION, User::ENSEIGNANT, User::ELEVE

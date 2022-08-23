@@ -45,7 +45,7 @@ export default {
     },
     methods: {
         renderAddEleve() {
-            this.showListEleve = !this.showListEleve;
+            this.showListEleve = false;
             this.showFormEleve = !this.showFormEleve;
             this.editEleveInForm = true;
             this.eleve = '';

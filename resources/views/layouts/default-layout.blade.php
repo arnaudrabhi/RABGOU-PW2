@@ -23,10 +23,13 @@
     @yield('head')
 </head>
 <body>
-<div class="container">
-    <div id="topbar">
-        @yield('topbar')
-    </div>
+
+<div id="topbar">
+    @yield('topbar')
+</div>
+
+<div id="body" class="container">
+
     <div id="content">
         @yield('content')
     </div>

@@ -28,7 +28,7 @@ Route::get('/dashboard', function () {
 
 // Routes Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1,2']], function() {
-    Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
+    Route::get('/dashboard', [AdminController::class, 'showAdminMenu'])->name('dashboardAdmin');
 });
 
 // Routes Administration
