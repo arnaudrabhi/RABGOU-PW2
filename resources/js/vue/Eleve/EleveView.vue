@@ -54,7 +54,7 @@ export default {
             eleve: {},
             classes: [],
             btnAddClicked: false,
-            btnListClicked: false
+            btnListClicked: true
         }
     },
 

@@ -1,26 +1,34 @@
 <template>
-    <div>
+    <div class="container-sm">
         <h3 class="text-center">Ajouter un élève</h3>
         <div>
-
                 <form @submit.prevent="sendPost">
-                    <div class="form-group">
-                        <label>Civilité</label>
-                        <select v-model="form.civ" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
-                            <option value="Mr">Mr</option>
-                            <option value="Mme">Mme</option>
-                            <option value="Mlle">Mlle</option>
-                        </select>
-                    </div>
 
-                    <div class="form-group">
-                        <label>Nom</label>
-                        <input type="text" class="form-control" v-model="form.nom" required>
-                    </div>
+                    <div class="row g-2">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Civilité</label>
+                                <select v-model="form.civ" class="form-control">
+                                    <option value="Mr">Mr</option>
+                                    <option value="Mme">Mme</option>
+                                    <option value="Mlle">Mlle</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Prenom</label>
-                        <input type="text" class="form-control" v-model="form.prenom" required>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Nom</label>
+                                <input type="text" class="form-control" v-model="form.nom" required>
+                            </div>
+                        </div>
+
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Prenom</label>
+                                <input type="text" class="form-control" v-model="form.prenom" required>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -30,7 +38,7 @@
 
                     <div class="form-group">
                         <label>Classe</label>
-                        <SelectItem v-model:value="form.classe_id" :values="classes" required/>
+                        <SelectItem v-model:value="form.classe_id" :values="classes" class="form-control" required/>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Ajouter élève</button>

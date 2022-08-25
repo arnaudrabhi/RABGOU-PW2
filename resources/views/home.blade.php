@@ -14,7 +14,7 @@ $connectedUser = Auth::user();
             <h1 class="h1">Prosign</h1>
             <div class="mt-10">
                 <p>Bienvenue {{$connectedUser->civ}} {{$connectedUser->nom}} {{$connectedUser->prenom}}</p>
-                <p>Prosign est un logicielle web dédié à l'émargement des élèves d'une classe</p>
+                <p>Prosign est un logiciel web dédié à l'émargement des élèves d'une classe</p>
             </div>
 {{--            <ul>--}}
 {{--                <li>--}}

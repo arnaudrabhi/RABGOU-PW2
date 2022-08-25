@@ -55,7 +55,7 @@ use Illuminate\Support\Facades\Auth as Auth;
                                 <x-dropdown-link :href="route('logout')"
                                                  onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                    {{ __('Log Out') }}
+                                    {{ __('Se déconnecter') }}
                                 </x-dropdown-link>
                             </form>
 {{--                        <li><a class="dropdown-item" href="#">Action</a></li>--}}
