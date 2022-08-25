@@ -5,10 +5,24 @@
 
             <div class="row align-items-start v-btn-group--density-default">
                 <div class="col">
-                    <button class="btn btn-primary btn-lg" @click="renderEleveTable">Liste des élèves</button>
+                    <button
+                        id="btnList"
+                        class="btn btn-primary btn-lg"
+                        @click="renderEleveTable"
+                        :class="this.btnListClicked ? 'btn-dark' : ''"
+                    >
+                        Liste des élèves
+                    </button>
                 </div>
                 <div class="col">
-                    <button class="btn btn-primary btn-lg" @click="renderEleveForm">Ajouter un élève</button>
+                    <button
+                        id="btnAdd"
+                        class="btn btn-primary btn-lg"
+                        @click="renderEleveForm"
+                        :class="this.btnAddClicked ? 'btn-dark' : ''"
+                    >
+                        Ajouter un élève
+                    </button>
                 </div>
             </div>
 
@@ -39,6 +53,8 @@ export default {
             showListEleve: true,
             eleve: {},
             classes: [],
+            btnAddClicked: false,
+            btnListClicked: false
         }
     },
 
@@ -57,18 +73,28 @@ export default {
             this.showListEleve = false;
             this.showFormEleve = true;
             this.editEleve = true;
+
+            this.btnListClicked = false;
+            this.btnAddClicked = true;
         },
         renderEleveTable() {
             this.eleve = {};
             this.showFormEleve = false;
             this.showListEleve = true;
             this.editEleve = false;
+
+            this.btnListClicked = true;
+            this.btnAddClicked = false;
+
         },
         renderEditEleve(eleve) {
             this.eleve = eleve;
             this.showListEleve = false;
             this.showFormEleve = !this.showFormEleve;
             this.editEleve = false;
+
+            this.btnListClicked = false;
+            this.btnAddClicked = false;
         }
     }
 }
