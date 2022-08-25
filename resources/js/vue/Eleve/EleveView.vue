@@ -15,13 +15,15 @@
             <EleveForm
                 v-if="showFormEleve"
                 :eleve=eleve
-                :editEleve=editEleveInForm>
+                :classes="classes"
+                :editEleve=editEleve>
             </EleveForm>
 
-            <eleve-table
+            <Eleve-table
                 v-if="showListEleve"
+                :classes="classes"
                 @editEleve='renderEditEleve($event)'>
-            </eleve-table>
+            </Eleve-table>
 
         </div>
         <br/>
@@ -35,9 +37,20 @@ export default {
             showFormEleve: false,
             editEleve: true,
             showListEleve: true,
-            eleve: '',
+            eleve: {},
+            classes: {},
         }
     },
+
+    created() {
+        this.axios
+            .get('http://localhost/RABGOU-PW2/public/classes/all')
+            .then(response => {
+                this.classes = response.data;
+                this.showTable = true;
+            });
+    },
+
     methods: {
         renderEleveForm() {
             this.eleve = '';

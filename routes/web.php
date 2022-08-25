@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\PostEleveController;
+use App\Http\Controllers\API\ClasseController;
 use App\Http\Controllers\API\PostEnseignantController;
 use App\Models\Classe;
 use App\Models\Groupe;
@@ -35,6 +36,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1,2']], functi
 Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']], function() {
     Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
 });
+
+// Routes Classe
+Route::get('classes/all', [ClasseController::class, 'index']);
+
 
 // Routes creation user
 Route::get('eleves/all', [PostEleveController::class, 'index']);

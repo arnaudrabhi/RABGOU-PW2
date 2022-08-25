@@ -10,7 +10,8 @@ class Eleve extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id'
+        'user_id',
+        'classe_id'
     ];
 
     public function user() {

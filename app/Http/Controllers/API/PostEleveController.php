@@ -19,7 +19,9 @@ class PostEleveController extends Controller
         $eleves = Eleve::all();
         $eleveArray = [];
         foreach ($eleves as $key => $eleve) {
-            $eleveArray[] = array_merge($eleve->toArray(), $eleve->user->toArray());
+            if ($eleve && $eleve->user) {
+                $eleveArray[] = array_merge($eleve->toArray(), $eleve->user->toArray());
+            }
         }
 
         return array_reverse($eleveArray);
@@ -31,13 +33,22 @@ class PostEleveController extends Controller
      */
     public function add(Request $request): JsonResponse
     {
+        $request->validate([
+            'civ' => ['required', 'string', 'max:255'],
+            'nom' => ['required', 'string', 'max:255'],
+            'prenom' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'classe_id' => ['required', 'integer', 'max:255'],
+        ]);
+
         $user = new User([
             'civ' => $request->input('civ'),
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'email' => $request->input('email'),
+            'classe_id' => $request->input('classe_id'),
             // TODO : Retirer le mot de passe par défaut
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Mot de passe = 'password'
+            'password' => 'password', // Mot de passe = 'password'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
             'role' => 4
         ]);
 
@@ -46,14 +57,19 @@ class PostEleveController extends Controller
         }
 
         $eleve = new Eleve([
-            'user_id' => $user->refresh()->id
+            'user_id' => $user->refresh()->id,
+            'classe_id' => $request->input('classe_id')
         ]);
 
         if(!$eleve->save()) {
             return abort(500, 'L\'élève n\'a pas pu être enregistré (eleve)');
         }
 
-        return response()->json('L\'élève a bien été crée !');
+        return response()->json([
+            'message' => 'test',
+            'eleve' => $eleve,
+            'user' => $user,
+        ]);
     }
 
     /**

@@ -9,8 +9,8 @@
                 <th>Civilité</th>
                 <th>Nom</th>
                 <th>Prénom</th>
-                <th>Moyenne</th>
                 <th>Classe</th>
+                <th>Moyenne</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -20,7 +20,7 @@
                 <td>{{ eleve.civ }}</td>
                 <td>{{ eleve.nom }}</td>
                 <td>{{ eleve.prenom }}</td>
-                <td>{{ eleve.classe }}</td>
+                <td>{{ getClassesLib(eleve.classe_id) }}</td>
                 <td>{{ eleve.moyenne }}</td>
                 <td class="">
                     <div class="btn-group" role="group">
@@ -32,6 +32,9 @@
                     </div>
                 </td>
             </tr>
+            <tr v-if="!eleves">
+                <p>Non saisi.</p>
+            </tr>
             </tbody>
         </table>
     </div>
@@ -41,7 +44,7 @@
 import {filter} from "lodash/collection";
 
 export default {
-    props: ['eleve'],
+    props: ['eleve', 'classes'],
 
     data() {
         return {
@@ -57,7 +60,15 @@ export default {
                 this.showTable = true;
             });
     },
+
+    computed: {
+    },
+
     methods: {
+        getClassesLib(id) {
+            return this.classes.filter(e => e.id === id)[0].nom;
+        },
+
         deletePost(id) {
             this.axios
                 .delete(`http://localhost/RABGOU-PW2/public/eleves/delete/${id}`)

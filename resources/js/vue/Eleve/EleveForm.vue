@@ -6,22 +6,27 @@
                 <form @submit.prevent="sendPost">
                     <div class="form-group">
                         <label>Civilité</label>
-                        <input type="text" class="form-control" v-model="eleve.civ">
+                        <input type="text" class="form-control" v-model="form.civ" requiredF>
                     </div>
 
                     <div class="form-group">
                         <label>Nom</label>
-                        <input type="text" class="form-control" v-model="eleve.nom">
+                        <input type="text" class="form-control" v-model="form.nom" required>
                     </div>
 
                     <div class="form-group">
                         <label>Prenom</label>
-                        <input type="text" class="form-control" v-model="eleve.prenom">
+                        <input type="text" class="form-control" v-model="form.prenom" required>
                     </div>
 
                     <div class="form-group">
                         <label>Email</label>
-                        <input type="email" class="form-control" v-model="eleve.email">
+                        <input type="email" class="form-control" v-model="form.email" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Classe</label>
+                        <SelectItem v-model:value="form.classe_id" :values="classes" required/>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Ajouter élève</button>
@@ -32,24 +37,36 @@
 </template>
 
 <script>
+import SelectItem from '../Commun/SelectItem.vue'
+
 export default {
-    props: ['editEleve', 'eleve'],
+    props: ['editEleve', 'eleve', 'classes'],
+
+    components: {
+        SelectItem
+    },
 
     data() {
         return {
             createNew: false,
-            
-            form: {
-                civ: this.eleve.civ,
-                nom: this.eleve.nom,
-                prenom: this.eleve.prenom,
-                email: this.eleve.email
-            },
+            form:{},
         }
     },
+
+    created() {
+        this.form = {
+            civ: this.eleve.civ,
+                nom: this.eleve.nom,
+                prenom: this.eleve.prenom,
+                email: this.eleve.email,
+                classe_id: this.eleve.classe_id
+        }
+    },
+
     methods: {
+
         sendPost() {
-            if (this.editEleveInForm) {
+            if (this.editEleve) {
                 this.addPost();
             } else {
                 this.editPost(this.eleve.id)
@@ -61,12 +78,12 @@ export default {
                 .then(response => (
                     console.log(response.data)
                 ))
-                .catch(error => console.log(error))
+                //.catch(error => console.log(error))
                 // .finally(() => this.loading = false)
         },
         editPost(id) {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/eleves/update/'.id, this.form)
+                .post('http://localhost/RABGOU-PW2/public/eleves/update/'+id, this.form)
                 .then(response => (
                     console.log(response.data.ok)
                 ))

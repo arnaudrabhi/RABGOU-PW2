@@ -84,7 +84,7 @@ class User extends Authenticatable
     public function getRoleLib(): string
     {
         return match ($this->role) {
-            1 => "Admin",
+            1 => "Administrateur",
             2 => "Administration",
             3 => "Enseignant",
             default => "élève",
