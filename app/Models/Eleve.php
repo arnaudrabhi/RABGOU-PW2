@@ -9,6 +9,8 @@ class Eleve extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'user_id';
+
     protected $fillable = [
         'user_id',
         'classe_id'
@@ -16,6 +18,14 @@ class Eleve extends Model
 
     public function user() {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function groupe() {
+        return $this->hasOne(Groupe::class, 'id', 'groupe_id');
+    }
+
+    public function classe() {
+        return $this->hasOne(Classe::class, 'id', 'classe_id');
     }
 
 }

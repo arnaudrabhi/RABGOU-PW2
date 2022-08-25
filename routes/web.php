@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CoursController;
+use App\Http\Controllers\API\CoursController;
+use App\Http\Controllers\CoursViewController;
 use App\Http\Controllers\API\ClasseController;
 use App\Http\Controllers\API\EleveController;
 use App\Http\Controllers\API\EnseignantController;
@@ -40,7 +41,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1,2']], functi
  * Routes Administration
  */
 Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']], function() {
-    Route::get('/dashboard', [CoursController::class, 'showAdminMenu']);
+    Route::get('/dashboard', [CoursViewController::class, 'showAdminMenu']);
 });
 
 /**
@@ -84,9 +85,15 @@ Route::group(['prefix' => 'emargement', 'middleware' => ['auth', 'role:1,2']], f
  * Routes Cours
  */
 Route::group(['prefix' => 'cours', 'middleware' => ['auth', 'role:1,2,3,4']], function() {
-    Route::get('/', [CoursController::class, 'index'])->name('coursHome');
-});
+    Route::get('/', [CoursViewController::class, 'index'])->name('coursHome');
 
+
+
+});
+Route::get('cours/actual/{id}', function($id) {
+    $controller = new CoursController();
+    return $controller->getActualCours($id);
+});
 
 
 

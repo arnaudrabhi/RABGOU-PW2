@@ -9,7 +9,9 @@ class Enseignant extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'user_id';
+
     public function user() {
-        return $this->hasOne(User::class);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

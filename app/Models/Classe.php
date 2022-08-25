@@ -16,4 +16,8 @@ class Classe extends Model
     public function groupes() {
         return $this->belongsToMany(Groupe::class);
     }
+
+    public function feuilles() {
+        return $this->belongsToMany(FeuilleEmargement::class);
+    }
 }

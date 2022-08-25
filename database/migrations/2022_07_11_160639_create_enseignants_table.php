@@ -16,7 +16,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('enseignants', function (Blueprint $table) {
-            $table->foreignIdFor(User::class);
+            $table->foreignIdFor(User::class)->primary();
             $table->integer('statut')->default('1');
             $table->timestamps();
         });
