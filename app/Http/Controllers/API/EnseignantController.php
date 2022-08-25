@@ -8,7 +8,7 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
-class PostEnseignantController extends Controller
+class EnseignantController extends Controller
 {
     /**
      * @return array

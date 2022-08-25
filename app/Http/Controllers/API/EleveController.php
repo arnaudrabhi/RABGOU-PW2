@@ -9,7 +9,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class PostEleveController extends Controller
+class EleveController extends Controller
 {
     /**
      * @return array
@@ -75,7 +75,7 @@ class PostEleveController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function edit($id): JsonResponse
+    public function get($id): JsonResponse
     {
         $post = Eleve::find($id);
         return response()->json($post);

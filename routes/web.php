@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\API\PostEleveController;
+use App\Http\Controllers\API\EleveController;
 use App\Http\Controllers\API\ClasseController;
-use App\Http\Controllers\API\PostEnseignantController;
+use App\Http\Controllers\API\EnseignantController;
 use App\Models\Classe;
 use App\Models\Groupe;
 use Illuminate\Support\Facades\Route;
@@ -42,22 +42,22 @@ Route::get('classes/all', [ClasseController::class, 'index']);
 
 
 // Routes creation user
-Route::get('eleves/all', [PostEleveController::class, 'index']);
+Route::get('eleves/all', [EleveController::class, 'index']);
 
 Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
 
-    Route::put('/add', [PostEleveController::class, 'add']);
-    Route::get('/edit/{id}', [PostEleveController::class, 'edit']);
-    Route::post('/update/{id}', [PostEleveController::class, 'update']);
-    Route::delete('/delete/{id}', [PostEleveController::class, 'delete']);
+    Route::put('/add', [EleveController::class, 'add']);
+    Route::get('/edit/{id}', [EleveController::class, 'get']);
+    Route::post('/update/{id}', [EleveController::class, 'update']);
+    Route::delete('/delete/{id}', [EleveController::class, 'delete']);
 });
 
 // Routes creation enseignant
 Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], function() {
-    Route::post('/add', [PostEnseignantController::class, 'add']);
-    Route::get('/edit/{id}', [PostEnseignantController::class, 'edit']);
-    Route::post('/update/{id}', [PostEnseignantController::class, 'update']);
-    Route::delete('/delete/{id}', [PostEnseignantController::class, 'delete']);
+    Route::post('/add', [EnseignantController::class, 'add']);
+    Route::get('/edit/{id}', [EnseignantController::class, 'edit']);
+    Route::post('/update/{id}', [EnseignantController::class, 'update']);
+    Route::delete('/delete/{id}', [EnseignantController::class, 'delete']);
 });
 
 
