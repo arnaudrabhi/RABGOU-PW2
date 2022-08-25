@@ -66,7 +66,6 @@ class PostEleveController extends Controller
         }
 
         return response()->json([
-            'message' => 'test',
             'eleve' => $eleve,
             'user' => $user,
         ]);

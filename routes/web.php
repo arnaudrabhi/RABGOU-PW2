@@ -46,7 +46,7 @@ Route::get('eleves/all', [PostEleveController::class, 'index']);
 
 Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
 
-    Route::post('/add', [PostEleveController::class, 'add']);
+    Route::put('/add', [PostEleveController::class, 'add']);
     Route::get('/edit/{id}', [PostEleveController::class, 'edit']);
     Route::post('/update/{id}', [PostEleveController::class, 'update']);
     Route::delete('/delete/{id}', [PostEleveController::class, 'delete']);

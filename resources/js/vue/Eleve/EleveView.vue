@@ -38,7 +38,7 @@ export default {
             editEleve: true,
             showListEleve: true,
             eleve: {},
-            classes: {},
+            classes: [],
         }
     },
 
@@ -53,13 +53,13 @@ export default {
 
     methods: {
         renderEleveForm() {
-            this.eleve = '';
+            this.eleve = {};
             this.showListEleve = false;
             this.showFormEleve = true;
             this.editEleve = true;
         },
         renderEleveTable() {
-            this.eleve = '';
+            this.eleve = {};
             this.showFormEleve = false;
             this.showListEleve = true;
             this.editEleve = false;

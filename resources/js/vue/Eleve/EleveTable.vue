@@ -61,9 +61,6 @@ export default {
             });
     },
 
-    computed: {
-    },
-
     methods: {
         getClassesLib(id) {
             return this.classes.filter(e => e.id === id)[0].nom;
@@ -79,7 +76,6 @@ export default {
         },
         editEleve(id) {
             this.$emit('editEleve', this.eleves.filter(e => e.user_id === id)[0]);
-
         }
     },
 }

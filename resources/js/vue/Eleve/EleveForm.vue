@@ -6,7 +6,11 @@
                 <form @submit.prevent="sendPost">
                     <div class="form-group">
                         <label>Civilité</label>
-                        <input type="text" class="form-control" v-model="form.civ" requiredF>
+                        <select v-model="form.civ" class="block mt-1 w-full rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                            <option value="Mr">Mr</option>
+                            <option value="Mme">Mme</option>
+                            <option value="Mlle">Mlle</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
@@ -33,6 +37,25 @@
                 </form>
 
         </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="messageModal" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="messageModalLabel">Enregistrement de l'élève</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.eleve.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
+                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'élève. Massage : {{error}}</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -50,16 +73,18 @@ export default {
         return {
             createNew: false,
             form:{},
+            error: '',
+            response: {}
         }
     },
 
     created() {
         this.form = {
             civ: this.eleve.civ,
-                nom: this.eleve.nom,
-                prenom: this.eleve.prenom,
-                email: this.eleve.email,
-                classe_id: this.eleve.classe_id
+            nom: this.eleve.nom,
+            prenom: this.eleve.prenom,
+            email: this.eleve.email,
+            classe_id: this.eleve.classe_id
         }
     },
 
@@ -74,12 +99,13 @@ export default {
         },
         addPost() {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/eleves/add', this.form)
+                .put('http://localhost/RABGOU-PW2/public/eleves/add', this.form)
                 .then(response => (
-                    console.log(response.data)
+                    console.log(response.data, this.response = response)
                 ))
-                //.catch(error => console.log(error))
+                .catch(error => console.log(error, this.error = error))
                 // .finally(() => this.loading = false)
+            $('#messageModal').modal('show');
         },
         editPost(id) {
             this.axios
