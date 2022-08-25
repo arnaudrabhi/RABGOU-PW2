@@ -1,11 +1,10 @@
 <?php
 
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\API\EleveController;
 use App\Http\Controllers\API\ClasseController;
+use App\Http\Controllers\API\EleveController;
 use App\Http\Controllers\API\EnseignantController;
-use App\Models\Classe;
-use App\Models\Groupe;
+use App\Http\Controllers\EmargementViewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,6 +59,11 @@ Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], 
     Route::delete('/delete/{id}', [EnseignantController::class, 'delete']);
 });
 
+
+// Routes Feuille d'émargement
+Route::group(['prefix' => 'emargement', 'middleware' => ['auth', 'role:1,2']], function() {
+    Route::get('/', [EmargementViewController::class, 'index'])->name('emargementHome');
+});
 
 /*
 Route::get('/testgroupe', function () {

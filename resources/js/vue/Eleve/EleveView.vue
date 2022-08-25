@@ -26,6 +26,8 @@
                 </div>
             </div>
 
+            <br />
+
             <EleveForm
                 v-if="showFormEleve"
                 :eleve=eleve

@@ -1,5 +1,5 @@
 <template>
-    <div class="container-sm">
+    <div class="container-sm align-content-center shadow-lg p-3 mb-5 bg-body rounded">
         <h3 class="text-center">Ajouter un élève</h3>
         <div>
                 <form @submit.prevent="sendPost">

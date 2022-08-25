@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth as Auth;
 
     if ($userAuth){
         switch ($userAuth->role) {
+            // TODO : Choisir les couleurs
             case "1":
                 $color = "#d14747";
                 break;
@@ -30,12 +31,18 @@ use Illuminate\Support\Facades\Auth as Auth;
                 <li class="nav-item">
                     <a class="nav-link" href="">Cours </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Feuille d'émargement</a>
-                </li>
+                @if($userAuth->role == 1 || $userAuth->role == 2)
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('dashboardAdmin') }}">Gestion</a>
                 </li>
+                @endif
+                @if($userAuth->role == 1 || $userAuth->role == 2)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('emargementHome') }}">Feuille d'émargement</a>
+                    </li>
+                @endif
+
+
             </ul>
             <ul class="navbar-nav mr-11">
                 <li class="nav-item dropdown">
