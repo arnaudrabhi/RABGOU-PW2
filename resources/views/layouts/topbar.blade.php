@@ -2,10 +2,10 @@
 use Illuminate\Support\Facades\Auth as Auth;
     $color = "#26474E";
 
-    $isAuth = Auth::user();
+    $userAuth = Auth::user();
 
-    if ($isAuth){
-        switch (Auth::user()->role) {
+    if ($userAuth){
+        switch ($userAuth->role) {
             case "1":
                 $color = "#d14747";
                 break;
@@ -23,8 +23,8 @@ use Illuminate\Support\Facades\Auth as Auth;
     ?>
 @section('topbar')
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: {{$color}}">
-        <a class="navbar-brand" href="/RABGOU-PW2/public">Intranet</a>
-        @if($isAuth)
+        <a class="navbar-brand" href="/RABGOU-PW2/public">Prosign</a>
+        @if($userAuth)
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
@@ -41,10 +41,10 @@ use Illuminate\Support\Facades\Auth as Auth;
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="navbar-text">
-                            {{ Illuminate\Support\Facades\Auth::user()->getRoleLib() }}
-                            {{ Illuminate\Support\Facades\Auth::user()->civ }}
-                            {{ Illuminate\Support\Facades\Auth::user()->nom }}
-                            {{ Illuminate\Support\Facades\Auth::user()->prenom }}
+                            {{ $userAuth->getRoleLib() }}
+                            {{ $userAuth->civ }}
+                            {{ $userAuth->nom }}
+                            {{ $userAuth->prenom }}
                         </span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-dark">
