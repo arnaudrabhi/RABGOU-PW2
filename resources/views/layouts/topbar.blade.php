@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Auth as Auth;
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="">Cours </a>
+                    <a class="nav-link" href="{{ route('coursHome') }}">Cours </a>
                 </li>
                 @if($userAuth->role == 1 || $userAuth->role == 2)
                 <li class="nav-item">

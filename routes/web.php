@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CoursController;
 use App\Http\Controllers\API\ClasseController;
 use App\Http\Controllers\API\EleveController;
 use App\Http\Controllers\API\EnseignantController;
@@ -26,21 +27,31 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-// Routes Admin
+
+
+/**
+ * Routes Admin
+ */
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::get('/dashboard', [AdminController::class, 'showAdminMenu'])->name('dashboardAdmin');
 });
 
-// Routes Administration
+/**
+ * Routes Administration
+ */
 Route::group(['prefix' => 'administration', 'middleware' => ['auth', 'role:2']], function() {
-    Route::get('/dashboard', [AdminController::class, 'showAdminMenu']);
+    Route::get('/dashboard', [CoursController::class, 'showAdminMenu']);
 });
 
-// Routes Classe
+/**
+ * Routes Classe
+ */
 Route::get('classes/all', [ClasseController::class, 'index']);
 
 
-// Routes creation user
+/**
+ * Routes creation user
+ */
 Route::get('eleves/all', [EleveController::class, 'index']);
 
 Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
@@ -51,7 +62,9 @@ Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], funct
     Route::delete('/delete/{id}', [EleveController::class, 'delete']);
 });
 
-// Routes creation enseignant
+/**
+ * Routes creation enseignant
+ */
 Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::post('/add', [EnseignantController::class, 'add']);
     Route::get('/edit/{id}', [EnseignantController::class, 'edit']);
@@ -60,10 +73,25 @@ Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], 
 });
 
 
-// Routes Feuille d'émargement
+/**
+ * Routes Feuille d'émargement
+ */
 Route::group(['prefix' => 'emargement', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::get('/', [EmargementViewController::class, 'index'])->name('emargementHome');
 });
+
+/**
+ * Routes Cours
+ */
+Route::group(['prefix' => 'cours', 'middleware' => ['auth', 'role:1,2,3,4']], function() {
+    Route::get('/', [CoursController::class, 'index'])->name('coursHome');
+});
+
+
+
+
+
+
 
 /*
 Route::get('/testgroupe', function () {
