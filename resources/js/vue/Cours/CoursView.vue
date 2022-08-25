@@ -16,7 +16,7 @@
             <div class="card-text">
                 {{ this.cour[0].matiere }}
                 <br />
-                De {{ this.cour[0].date_heure_debut.date }} à {{ this.cour[0].date_heure_fin }}
+                De {{ this.cour[0].date_heure_debut }} à {{ this.cour[0].date_heure_fin }}
             </div>
 
         </div>
