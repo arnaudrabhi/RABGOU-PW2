@@ -10,6 +10,12 @@ class SignatureFeuilleEmargement extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'feuille_emargement_id',
+        'eleve_user_id',
+        'statut'
+    ];
+
     public function eleve(): HasOne
     {
         return $this->hasOne(Eleve::class);

@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth as Auth;
     ?>
 @section('topbar')
     <nav class="navbar navbar-expand-lg navbar-light" style="background-color: {{$color}}">
-        <a class="navbar-brand" href="/RABGOU-PW2/public">Prosign</a>
+        <a class="navbar-brand" href="{{ route('home') }}">Prosign</a>
         @if($userAuth)
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">

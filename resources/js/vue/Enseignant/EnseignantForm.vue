@@ -1,5 +1,5 @@
 <template>
-    <div class="container-sm align-content-center shadow-lg p-3 mb-5 bg-body rounded">
+    <div class="container-sm align-content-center shadow-lg p-3 mb-5 bg-body rounded-2">
         <h3 class="text-center">Ajouter un élève</h3>
         <div>
                 <form @submit.prevent="sendPost">
@@ -31,17 +31,22 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" v-model="form.email" required>
+                    <div class="row g-2">
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="email" class="form-control" v-model="form.email" required>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label>Matière</label>
+                                <input type="text" class="form-control" v-model="form.matiere" required>
+                            </div>
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label>Classe</label>
-                        <SelectItem v-model:value="form.classe_id" :values="classes" class="form-control" required/>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Ajouter élève</button>
+                    <button type="submit" class="btn btn-primary">Ajouter enseignant</button>
                 </form>
 
         </div>
@@ -55,8 +60,8 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.eleve.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
-                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'élève. Massage : {{error}}</p>
+                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.Enseignant.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
+                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'enseignant. Massage : {{error}}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
@@ -71,7 +76,7 @@
 import SelectItem from '../Commun/SelectItem.vue'
 
 export default {
-    props: ['editEleve', 'eleve', 'classes'],
+    props: ['editEnseignant', 'Enseignant', 'classes'],
 
     components: {
         SelectItem
@@ -88,11 +93,11 @@ export default {
 
     created() {
         this.form = {
-            civ: this.eleve.civ,
-            nom: this.eleve.nom,
-            prenom: this.eleve.prenom,
-            email: this.eleve.email,
-            classe_id: this.eleve.classe_id
+            civ: this.Enseignant.civ,
+            nom: this.Enseignant.nom,
+            prenom: this.Enseignant.prenom,
+            email: this.Enseignant.email,
+            matiere: this.Enseignant.matiere
         }
     },
 
@@ -100,25 +105,25 @@ export default {
 
         sendPost() {
             this.error = '';
-            if (this.editEleve) {
+            if (this.editEnseignant) {
                 this.addPost();
             } else {
-                this.editPost(this.eleve.id)
+                this.editPost(this.Enseignant.id)
             }
         },
         addPost() {
             this.axios
-                .put('http://localhost/RABGOU-PW2/public/eleves/add', this.form)
-                .then(response => (
-                    console.log(response.data, this.response = response)
-                ))
+                .put('http://localhost/RABGOU-PW2/public/Enseignants/add', this.form)
+                .then(function(response) {
+                    console.log(response.data, this.response = response);
+                    this.form = {}
+                })
                 .catch(error => console.log(error, this.error = error))
-                .finally(() => this.form = {})
             $('#messageModal').modal('show');
         },
         editPost(id) {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/eleves/update/'+id, this.form)
+                .post('http://localhost/RABGOU-PW2/public/Enseignants/update/'+id, this.form)
                 .then(response => (
                     console.log(response.data.ok)
                 ))

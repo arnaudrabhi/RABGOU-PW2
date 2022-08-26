@@ -23,12 +23,11 @@ $connectedUser = Auth::user();
         </div>
         <div class="col-4">
             @if($connectedUser->role != 2)
-                <div id="CoursView" class="position-relative">
+                <div id="CoursView" class="">
                     <cours-view
-                        :iseleve="{{ in_array($connectedUser->role, [1, 3]) ? 'false' : 'true'}}"
-                        :iduser="{{\Illuminate\Support\Facades\Auth::user()->id}}"
+                        :iseleveprop="{{ in_array($connectedUser->role, [1, 3]) ? 'false' : 'true'}}"
+                        :authuser="{{$connectedUser}}"
                     >
-
                     </cours-view>
                 </div>
             @endif

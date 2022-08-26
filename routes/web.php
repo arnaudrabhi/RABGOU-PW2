@@ -22,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-})->middleware(['auth']);
+})->middleware(['auth'])->name('home');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -53,10 +53,10 @@ Route::get('classes/all', [ClasseController::class, 'index']);
 /**
  * Routes creation user
  */
-Route::get('eleves/all', [EleveController::class, 'index']);
+
 
 Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], function() {
-
+    Route::get('/all', [EleveController::class, 'index']);
     Route::put('/add', [EleveController::class, 'add']);
     Route::get('/edit/{id}', [EleveController::class, 'get']);
     Route::post('/update/{id}', [EleveController::class, 'update']);
@@ -68,7 +68,7 @@ Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], funct
  */
 Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::post('/add', [EnseignantController::class, 'add']);
-    Route::get('/edit/{id}', [EnseignantController::class, 'edit']);
+    Route::get('/get/{id}', [EnseignantController::class, 'get']);
     Route::post('/update/{id}', [EnseignantController::class, 'update']);
     Route::delete('/delete/{id}', [EnseignantController::class, 'delete']);
 });
@@ -86,14 +86,21 @@ Route::group(['prefix' => 'emargement', 'middleware' => ['auth', 'role:1,2']], f
  */
 Route::group(['prefix' => 'cours', 'middleware' => ['auth', 'role:1,2,3,4']], function() {
     Route::get('/', [CoursViewController::class, 'index'])->name('coursHome');
-
-
+    Route::get('/actual/{id}', function($id) {
+        $controller = new CoursController();
+        return $controller->getActualCours($id);
+    });
+    Route::get('{idcours}/sign/{iduser}', function($idcours, $iduser) {
+        $controller = new CoursController();
+        return $controller->signCours($idcours, $iduser);
+    });
+    Route::get('{idcours}/hassigned/{iduser}', function($idcours, $iduser) {
+        $controller = new CoursController();
+        return $controller->hasEleveSigned($idcours, $iduser);
+    });
 
 });
-Route::get('cours/actual/{id}', function($id) {
-    $controller = new CoursController();
-    return $controller->getActualCours($id);
-});
+
 
 
 

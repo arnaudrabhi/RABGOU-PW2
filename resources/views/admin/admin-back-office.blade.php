@@ -7,7 +7,8 @@
 
 
 @section('content')
-    <div id="EleveView">
-        <eleve-view></eleve-view>
+    <div id="appBackOffice">
+        <app-back-office></app-back-office>
     </div>
+
 @endsection

@@ -46,7 +46,6 @@ class EleveController extends Controller
             'nom' => $request->input('nom'),
             'prenom' => $request->input('prenom'),
             'email' => $request->input('email'),
-            'classe_id' => $request->input('classe_id'),
             // TODO : Retirer le mot de passe par défaut
             'password' => 'password', // Mot de passe = 'password'$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi
             'role' => 4

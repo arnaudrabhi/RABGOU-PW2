@@ -32,7 +32,7 @@ class EnseignantController extends Controller
             'email' => $request->input('email'),
             // TODO : Retirer le mot de passe par défaut
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Mot de passe = 'password'
-            'role' => 3
+            'role' => 2
         ]);
 
         if(!$user->save()) {
@@ -41,7 +41,8 @@ class EnseignantController extends Controller
         $user->refresh();
 
         $enseignant = new Enseignant([
-            'user_id' => $user->id
+            'user_id' => $user->id,
+            'matiere' => $request->input('matiere'),
         ]);
 
         if(!$enseignant->save()) {
@@ -55,7 +56,7 @@ class EnseignantController extends Controller
      * @param $id
      * @return JsonResponse
      */
-    public function edit($id): JsonResponse
+    public function get($id): JsonResponse
     {
         $enseignant = Enseignant::find($id);
         return response()->json($enseignant);
