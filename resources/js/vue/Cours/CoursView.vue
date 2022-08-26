@@ -33,8 +33,11 @@
             <div class="card-text" v-if="this.cour[0] && this.iseleve && !hasSignedAlready">
                 <a class="btn btn-primary" @click="signFeuille">Signer la feuille d'émargement</a>
             </div>
-            <div class="card-text" v-else>
+            <div class="card-text" v-else-if="this.cour[0] && this.iseleve && hasSignedAlready">
                 La feuille a déjà été signée
+            </div>
+            <div class="v-card-text" v-if="this.cour[0] && !this.iseleve">
+                <a class="btn btn-primary">Ouvrir la feuille d'émargement</a>
             </div>
 
 

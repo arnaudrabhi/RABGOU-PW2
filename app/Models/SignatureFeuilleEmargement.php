@@ -8,6 +8,12 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class SignatureFeuilleEmargement extends Model
 {
+
+    const STATUT_PAS_SIGNE = 0;
+    const STATUT_SIGNE = 1;
+    const STATUT_SIGNER_NON_PRESENT = 2;
+    const STATUT_SIGNER_ET_PRESENT = 3;
+
     use HasFactory;
 
     protected $fillable = [
