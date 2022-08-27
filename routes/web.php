@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\CoursController;
+use App\Http\Controllers\API\EmargementController;
 use App\Http\Controllers\CoursViewController;
 use App\Http\Controllers\API\ClasseController;
 use App\Http\Controllers\API\EleveController;
@@ -51,7 +52,7 @@ Route::get('classes/all', [ClasseController::class, 'index']);
 
 
 /**
- * Routes creation user
+ * Routes CRUD user
  */
 
 
@@ -64,7 +65,7 @@ Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], funct
 });
 
 /**
- * Routes creation enseignant
+ * Routes CRUD enseignant
  */
 Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], function() {
     Route::post('/add', [EnseignantController::class, 'add']);
@@ -98,12 +99,18 @@ Route::group(['prefix' => 'cours', 'middleware' => ['auth', 'role:1,2,3,4']], fu
         $controller = new CoursController();
         return $controller->hasEleveSigned($idcours, $iduser);
     });
+    Route::get('{idcours}/eleves', function($idcours) {
+        $controller = new CoursController();
+        return $controller->getEleveCours($idcours);
+    });
 
 });
 
-
-
-
+Route::get('/emargement/all', [EmargementController::class, 'index']);
+Route::get('/emargement/{id}', function($id) {
+    $controller = new EmargementController();
+    return $controller->getFeuilleData($id);
+});
 
 
 

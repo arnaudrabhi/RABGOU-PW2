@@ -2,7 +2,7 @@
     <div class="container-sm">
         <h3 class="text-center">Tous les élèves</h3><br/>
 
-        <table v-if="showTable" class="table table-bordered">
+        <table v-if="showTable" class="table table-bordered table-hover">
             <thead>
             <tr>
                 <th>ID</th>
@@ -58,7 +58,8 @@ export default {
             .then(response => {
                 this.eleves = response.data;
                 this.showTable = true;
-            });
+            })
+            .finally(() =>this.showTable = true);
     },
 
     methods: {

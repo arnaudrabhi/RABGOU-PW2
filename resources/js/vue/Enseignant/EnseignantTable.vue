@@ -54,7 +54,8 @@ export default {
             .then(response => {
                 this.Enseignants = response.data;
                 this.showTable = true;
-            });
+            })
+            .finally(() =>this.showTable = true);
     },
 
     methods: {

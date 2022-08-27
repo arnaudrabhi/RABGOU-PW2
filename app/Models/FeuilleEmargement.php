@@ -4,25 +4,26 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class FeuilleEmargement extends Model
 {
     use HasFactory;
 
-    function classe(): HasOne
+    function classe(): belongsTo
     {
-        return $this->hasOne(Classe::class);
+        return $this->belongsTo(Classe::class);
     }
 
-    function cour(): HasOne
+    function cour(): belongsTo
     {
-        return $this->hasOne(Cour::class);
+        return $this->belongsTo(Cour::class);
     }
 
-    function enseignant(): HasOne
+    function enseignant(): belongsTo
     {
-        return $this->hasOne(Enseignant::class);
+        return $this->belongsTo(Enseignant::class);
     }
 
 }

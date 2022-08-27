@@ -83,7 +83,7 @@ class CoursController extends Controller
         if (!$signature->save()) {
             return response(['message' => 'Fail to save'], 500);
         }
-        return response(['message' => 'La signagture de l\'élève a bien été enregistrée'], 200);
+        return response(['message' => 'La signature de l\'élève a bien été enregistrée'], 200);
     }
 
     public function hasEleveSigned($idcours, $iduser) {
@@ -99,6 +99,15 @@ class CoursController extends Controller
             return response(['hassigned' => 'true']);
         }
         return response(['hassigned' => 'false']);
+    }
+
+    public function getEleveCours($idcours) {
+        $cours = Cour::query()->where('id', '=', $idcours)->first();
+        $classe = $cours->classe;
+
+        $eleves = Eleve::where('classe_id', '=', $classe->id)->get();
+
+        return $eleves->toArray();
     }
 
 }

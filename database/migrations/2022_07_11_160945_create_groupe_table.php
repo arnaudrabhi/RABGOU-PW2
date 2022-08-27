@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('groupes', function (Blueprint $table) {
             $table->id();
             $table->string('libelle');
+            $table->integer('statut')->default(1);
             $table->timestamps();
         });
     }

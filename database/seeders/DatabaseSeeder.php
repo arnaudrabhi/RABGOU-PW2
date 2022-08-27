@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classe;
+use App\Models\Eleve;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
