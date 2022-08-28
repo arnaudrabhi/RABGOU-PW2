@@ -30,14 +30,12 @@
 
             <groupeForm
                 v-if="showFormgroupe"
-                :groupe=groupe
-                :classes="classes"
                 :editgroupe=editgroupe>
             </groupeForm>
 
             <groupe-table
                 v-if="showListgroupe"
-                :classes="classes"
+                :groupes="groupes"
                 @editgroupe='renderEditgroupe($event)'>
             </groupe-table>
 
@@ -53,8 +51,6 @@ export default {
             showFormgroupe: false,
             editgroupe: true,
             showListgroupe: true,
-            groupe: {},
-            classes: [],
             btnAddClicked: false,
             btnListClicked: true
         }
@@ -62,9 +58,9 @@ export default {
 
     created() {
         this.axios
-            .get('http://localhost/RABGOU-PW2/public/classes/all')
+            .get('http://localhost/RABGOU-PW2/public/groupes/all')
             .then(response => {
-                this.classes = response.data;
+                this.groupes = response.data;
                 this.showTable = true;
             });
     },

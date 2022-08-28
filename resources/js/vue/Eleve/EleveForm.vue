@@ -100,7 +100,7 @@ export default {
 
         sendPost() {
             this.error = '';
-            if (this.editEleve) {
+            if (!this.editEleve) {
                 this.editPost(this.eleve.id)
             } else {
                 this.addPost();

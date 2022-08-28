@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\API\CoursController;
 use App\Http\Controllers\API\EmargementController;
+use App\Http\Controllers\API\GroupeController;
 use App\Http\Controllers\CoursViewController;
 use App\Http\Controllers\API\ClasseController;
 use App\Http\Controllers\API\EleveController;
@@ -72,6 +73,33 @@ Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], 
     Route::get('/get/{id}', [EnseignantController::class, 'get']);
     Route::post('/update/{id}', [EnseignantController::class, 'update']);
     Route::delete('/delete/{id}', [EnseignantController::class, 'delete']);
+});
+
+/**
+ * Routes CRUD classe
+ */
+
+
+Route::group(['prefix' => 'classes', 'middleware' => ['auth', 'role:1,2']], function() {
+    Route::get('/all', [ClasseController::class, 'index']);
+    Route::put('/add', [ClasseController::class, 'add']);
+    Route::get('/edit/{id}', [ClasseController::class, 'get']);
+    Route::post('/update/{id}', [ClasseController::class, 'update']);
+    Route::delete('/delete/{id}', [ClasseController::class, 'delete']);
+});
+
+
+/**
+ * Routes CRUD groupe
+ */
+
+
+Route::group(['prefix' => 'groupes', 'middleware' => ['auth', 'role:1,2']], function() {
+    Route::get('/all', [GroupeController::class, 'index']);
+    Route::put('/add', [GroupeController::class, 'add']);
+    Route::get('/edit/{id}', [GroupeController::class, 'get']);
+    Route::post('/update/{id}', [GroupeController::class, 'update']);
+    Route::delete('/delete/{id}', [GroupeController::class, 'delete']);
 });
 
 

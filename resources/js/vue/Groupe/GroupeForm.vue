@@ -4,41 +4,9 @@
         <div>
                 <form @submit.prevent="sendPost">
 
-                    <div class="row g-2">
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Civilité</label>
-                                <select v-model="form.civ" class="form-control">
-                                    <option value="Mr">Mr</option>
-                                    <option value="Mme">Mme</option>
-                                    <option value="Mlle">Mlle</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Nom</label>
-                                <input type="text" class="form-control" v-model="form.nom" required>
-                            </div>
-                        </div>
-
-                        <div class="col">
-                            <div class="form-group">
-                                <label>Prenom</label>
-                                <input type="text" class="form-control" v-model="form.prenom" required>
-                            </div>
-                        </div>
-                    </div>
-
                     <div class="form-group">
-                        <label>Email</label>
-                        <input type="email" class="form-control" v-model="form.email" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Classe</label>
-                        <SelectItem v-model:value="form.classe_id" :values="classes" class="form-control" required/>
+                        <label>libelle</label>
+                        <input type="text" class="form-control" v-model="form.libelle" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Ajouter groupe</button>
@@ -51,12 +19,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="messageModalLabel">Enregistrement de l'groupe</h5>
+                        <h5 class="modal-title" id="messageModalLabel">Enregistrement du groupe</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.groupe.user_id" class="text-success"> L'groupe {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
-                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'groupe. Massage : {{error}}</p>
+                        <p v-if="response && response.data && response.data.libelle"> le groupe {{response.data.libelle }} à été enregistré avec succès</p>
+                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement du groupe. Massage : {{error}}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
@@ -88,11 +56,7 @@ export default {
 
     created() {
         this.form = {
-            civ: this.groupe.civ,
-            nom: this.groupe.nom,
-            prenom: this.groupe.prenom,
-            email: this.groupe.email,
-            classe_id: this.groupe.classe_id
+            libelle: this.groupe.libelle,
         }
     },
 

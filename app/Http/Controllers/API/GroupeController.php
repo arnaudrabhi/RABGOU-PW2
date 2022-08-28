@@ -3,22 +3,24 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Classe;
-use App\Models\User;
+use App\Models\Eleve;
+use App\Models\Groupe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class ClasseController extends Controller
+class GroupeController extends Controller
 {
     /**
      * @return array
      */
     public function index(): array
     {
-        $classes = Classe::all();
-        return array_reverse($classes->toArray());
+        $groupes = Groupe::all();
+
+        return array_reverse($groupes->toArray());
     }
+
     /**
      * @param Request $request
      * @return JsonResponse
@@ -26,16 +28,16 @@ class ClasseController extends Controller
     public function add(Request $request): JsonResponse
     {
 
-        $Classe = new Classe([
-            'nom' => $request->input('nom')
+        $groupe = new Groupe([
+            'libelle' => $request->input('libelle')
         ]);
 
-        if(!$Classe->save()) {
-            return abort(500, 'La classe n\'a pas pu être enregistré');
+        if(!$groupe->save()) {
+            return abort(500, 'Le groupe n\'a pas pu être enregistré');
         }
 
         return response()->json([
-            'Classe' => $Classe,
+            'groupe' => $groupe,
         ]);
     }
 
@@ -45,8 +47,8 @@ class ClasseController extends Controller
      */
     public function get($id): JsonResponse
     {
-        $Classe = Classe::find($id);
-        return response()->json($Classe);
+        $groupe = Groupe::find($id);
+        return response()->json($groupe);
     }
 
     /**
@@ -56,12 +58,12 @@ class ClasseController extends Controller
      */
     public function update($id, Request $request): JsonResponse
     {
-        $Classe = Classe::find($id);
-        $Classe->update($request->all());
+        $groupe = Groupe::find($id);
+        $groupe->update($request->all());
 
         return response()->json([
-            'message' => 'Le Classe a bien été mis à jour !',
-            'Classe' => $Classe
+            'message' => 'Le groupe a bien été mis à jour !',
+            'groupe' => $groupe
         ]);
     }
 
@@ -71,12 +73,13 @@ class ClasseController extends Controller
      */
     public function delete($id): JsonResponse
     {
-        $Classe = Classe::find($id);
-        $Classe->delete();
+        $groupe = Groupe::find($id);
+        $groupe->delete();
 
         return response()->json([
-            'message' => 'Le Classe a bien été supprimé !',
+            'message' => 'Le groupe a bien été supprimé !',
             'ok' => true
         ]);
     }
 }
+
