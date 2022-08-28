@@ -5,7 +5,7 @@
                 <form @submit.prevent="sendPost">
 
                     <div class="form-group">
-                        <label>libelle</label>
+                        <label>Libelle</label>
                         <input type="text" class="form-control" v-model="form.libelle" required>
                     </div>
 
@@ -23,7 +23,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p v-if="response && response.data && response.data.libelle"> le groupe {{response.data.libelle }} à été enregistré avec succès</p>
+                        <p v-if="response && response.data && response.data.groupe"> le groupe {{response.data.groupe.libelle }} à été enregistré avec succès</p>
                         <p v-if="error"> Une erreur c'est produite lors de l'enregistrement du groupe. Massage : {{error}}</p>
                     </div>
                     <div class="modal-footer">

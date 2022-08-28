@@ -1,6 +1,6 @@
 <template>
     <div class="container-sm">
-        <h3 class="text-center">Tous les élèves</h3><br/>
+        <h3 class="text-center">Tous les enseignants</h3><br/>
 
         <table v-if="showTable" class="table table-bordered">
             <thead>
@@ -13,22 +13,22 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="Enseignant in Enseignants" :key="Enseignant.id">
-                <td>{{ Enseignant.id }}</td>
-                <td>{{ Enseignant.civ }}</td>
-                <td>{{ Enseignant.nom }}</td>
-                <td>{{ Enseignant.prenom }}</td>
+            <tr v-for="enseignant in Enseignants" :key="Enseignant.id">
+                <td>{{ enseignant.id }}</td>
+                <td>{{ enseignant.civ }}</td>
+                <td>{{ enseignant.nom }}</td>
+                <td>{{ enseignant.prenom }}</td>
                 <td class="">
                     <div class="btn-group" role="group">
-                        <button class="btn btn-danger" @click="deletePost(Enseignant.id)">Supprimer</button>
+                        <button class="btn btn-danger" @click="deletePost(enseignant.id)">Supprimer</button>
                     </div>
                     &nbsp
                     <div class="btn-group" role="group">
-                        <button class="btn btn-primary" @click="editEnseignant(Enseignant.id)">Modif.</button>
+                        <button class="btn btn-primary" @click="editEnseignant(enseignant.id)">Modif.</button>
                     </div>
                 </td>
             </tr>
-            <tr v-if="!Enseignants">
+            <tr v-if="!enseignants">
                 <p>Non saisi.</p>
             </tr>
             </tbody>
@@ -37,22 +37,20 @@
 </template>
 
 <script>
-import {filter} from "lodash/collection";
-
 export default {
-    props: ['Enseignant'],
+    props: ['enseignant'],
 
     data() {
         return {
-            Enseignants: [],
+            enseignants: [],
             showTable: false
         }
     },
     created() {
         this.axios
-            .get('http://localhost/RABGOU-PW2/public/Enseignants/all')
+            .get('http://localhost/RABGOU-PW2/public/enseignants/all')
             .then(response => {
-                this.Enseignants = response.data;
+                this.enseignants = response.data;
                 this.showTable = true;
             })
             .finally(() =>this.showTable = true);
@@ -65,7 +63,7 @@ export default {
 
         deletePost(id) {
             this.axios
-                .delete(`http://localhost/RABGOU-PW2/public/Enseignants/delete/${id}`)
+                .delete(`http://localhost/RABGOU-PW2/public/enseignants/delete/${id}`)
                 .then(response => {
                     let i = this.Enseignants.map(item => item.id).indexOf(id); // find index of object
                     this.Enseignants.splice(i, 1)

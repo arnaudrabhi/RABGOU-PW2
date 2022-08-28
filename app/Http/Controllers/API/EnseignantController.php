@@ -31,7 +31,7 @@ class EnseignantController extends Controller
             'prenom' => $request->input('prenom'),
             'email' => $request->input('email'),
             // TODO : Retirer le mot de passe par défaut
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // Mot de passe = 'password'
+            'password' => 'password', // Mot de passe = '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi'
             'role' => 2
         ]);
 

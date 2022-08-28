@@ -13,7 +13,10 @@ class Eleve extends Model
 
     protected $fillable = [
         'user_id',
+        'moyenne',
+        'statut',
         'classe_id',
+        'groupe_id'
     ];
 
     public function user() {

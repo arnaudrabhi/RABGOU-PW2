@@ -41,6 +41,11 @@
                         <SelectItem v-model:value="form.classe_id" :values="classes" class="form-control" required/>
                     </div>
 
+                    <div class="form-group">
+                        <label>Groupe</label>
+                        <SelectItem v-model:value="form.groupe_id" :values="groupes" class="form-control" required/>
+                    </div>
+
                     <button type="submit" class="btn btn-primary">Ajouter élève</button>
                 </form>
 
@@ -55,7 +60,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.eleve.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
+                        <p v-if="response && response.data && response.data.user && response.data.user.nom" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
                         <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'élève. Massage : {{error}}</p>
                     </div>
                     <div class="modal-footer">
@@ -71,7 +76,7 @@
 import SelectItem from '../Commun/SelectItem.vue'
 
 export default {
-    props: ['editEleve', 'eleve', 'classes'],
+    props: ['editEleve', 'eleve', 'classes', 'groupes'],
 
     components: {
         SelectItem
@@ -92,7 +97,8 @@ export default {
             nom: this.eleve.nom,
             prenom: this.eleve.prenom,
             email: this.eleve.email,
-            classe_id: this.eleve.classe_id
+            classe_id: this.eleve.classe_id,
+            groupe_id: this.eleve.groupe_id
         }
     },
 

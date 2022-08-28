@@ -21,7 +21,7 @@
                         @click="rendergroupeForm"
                         :class="this.btnAddClicked ? 'btn-dark' : ''"
                     >
-                        Ajouter un groupes
+                        Ajouter un groupe
                     </button>
                 </div>
             </div>
@@ -30,6 +30,7 @@
 
             <groupeForm
                 v-if="showFormgroupe"
+                :groupe="groupe"
                 :editgroupe=editgroupe>
             </groupeForm>
 
@@ -52,7 +53,9 @@ export default {
             editgroupe: true,
             showListgroupe: true,
             btnAddClicked: false,
-            btnListClicked: true
+            btnListClicked: true,
+            groupes: {},
+            groupe: []
         }
     },
 

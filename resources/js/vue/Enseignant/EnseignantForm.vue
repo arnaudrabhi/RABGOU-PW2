@@ -76,7 +76,7 @@
 import SelectItem from '../Commun/SelectItem.vue'
 
 export default {
-    props: ['editEnseignant', 'Enseignant', 'classes'],
+    props: ['editEnseignant', 'enseignant', 'classes'],
 
     components: {
         SelectItem
@@ -113,7 +113,7 @@ export default {
         },
         addPost() {
             this.axios
-                .put('http://localhost/RABGOU-PW2/public/Enseignants/add', this.form)
+                .put('http://localhost/RABGOU-PW2/public/enseignants/add', this.form)
                 .then(function(response) {
                     console.log(response.data, this.response = response);
                     this.form = {}
@@ -123,7 +123,7 @@ export default {
         },
         editPost(id) {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/Enseignants/update/'+id, this.form)
+                .post('http://localhost/RABGOU-PW2/public/enseignants/update/'+id, this.form)
                 .then(response => (
                     console.log(response.data.ok)
                 ))

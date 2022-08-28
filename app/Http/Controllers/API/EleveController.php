@@ -39,6 +39,7 @@ class EleveController extends Controller
             'prenom' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'classe_id' => ['required', 'integer', 'max:255'],
+            'groupe_id' => ['required', 'integer', 'max:255']
         ]);
 
         $user = new User([
@@ -57,7 +58,8 @@ class EleveController extends Controller
 
         $eleve = new Eleve([
             'user_id' => $user->refresh()->id,
-            'classe_id' => $request->input('classe_id')
+            'classe_id' => $request->input('classe_id'),
+            'groupe_id' => $request->input('groupe_id')
         ]);
 
         if(!$eleve->save()) {

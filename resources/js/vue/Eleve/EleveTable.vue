@@ -41,10 +41,8 @@
 </template>
 
 <script>
-import {filter} from "lodash/collection";
-
 export default {
-    props: ['eleve', 'classes'],
+    props: ['classes'],
 
     data() {
         return {

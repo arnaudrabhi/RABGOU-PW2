@@ -6,22 +6,13 @@
             <thead>
             <tr>
                 <th>ID</th>
-                <th>Civilité</th>
                 <th>Nom</th>
-                <th>Prénom</th>
-                <th>Classe</th>
-                <th>Moyenne</th>
-                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr v-for="groupe in groupes" :key="groupe.id">
                 <td>{{ groupe.id }}</td>
-                <td>{{ groupe.civ }}</td>
-                <td>{{ groupe.nom }}</td>
-                <td>{{ groupe.prenom }}</td>
-                <td>{{ getClassesLib(groupe.classe_id) }}</td>
-                <td>{{ groupe.moyenne }}</td>
+                <td>{{ groupe.libelle }}</td>
                 <td class="">
                     <div class="btn-group" role="group">
                         <button class="btn btn-danger" @click="deletePost(groupe.id)">Supprimer</button>
@@ -41,10 +32,8 @@
 </template>
 
 <script>
-import {filter} from "lodash/collection";
-
 export default {
-    props: ['groupe', 'classes'],
+    props: ['classes'],
 
     data() {
         return {
@@ -63,10 +52,6 @@ export default {
     },
 
     methods: {
-        getClassesLib(id) {
-            return this.classes.filter(e => e.id === id)[0].nom;
-        },
-
         deletePost(id) {
             this.axios
                 .delete(`http://localhost/RABGOU-PW2/public/groupes/delete/${id}`)
@@ -76,7 +61,7 @@ export default {
                 });
         },
         editgroupe(id) {
-            this.$emit('editgroupe', this.groupes.filter(e => e.user_id === id)[0]);
+            this.$emit('editgroupe', this.groupes.filter(e => e.id === id)[0]);
         }
     },
 }

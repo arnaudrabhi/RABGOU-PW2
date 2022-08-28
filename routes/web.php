@@ -69,7 +69,7 @@ Route::group(['prefix' => 'eleves', 'middleware' => ['auth', 'role:1,2']], funct
  * Routes CRUD enseignant
  */
 Route::group(['prefix' => 'enseignants', 'middleware' => ['auth', 'role:1,2']], function() {
-    Route::post('/add', [EnseignantController::class, 'add']);
+    Route::put('/add', [EnseignantController::class, 'add']);
     Route::get('/get/{id}', [EnseignantController::class, 'get']);
     Route::post('/update/{id}', [EnseignantController::class, 'update']);
     Route::delete('/delete/{id}', [EnseignantController::class, 'delete']);

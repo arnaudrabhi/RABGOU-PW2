@@ -32,6 +32,7 @@
                 v-if="showFormEleve"
                 :eleve=eleve
                 :classes="classes"
+                :groupes="groupes"
                 :editEleve=editEleve>
             </EleveForm>
 
@@ -55,6 +56,7 @@ export default {
             showListEleve: true,
             eleve: {},
             classes: [],
+            groupes: [],
             btnAddClicked: false,
             btnListClicked: true
         }
@@ -65,6 +67,12 @@ export default {
             .get('http://localhost/RABGOU-PW2/public/classes/all')
             .then(response => {
                 this.classes = response.data;
+                this.showTable = true;
+            });
+        this.axios
+            .get('http://localhost/RABGOU-PW2/public/groupes/all')
+            .then(response => {
+                this.groupes = response.data;
                 this.showTable = true;
             });
     },
