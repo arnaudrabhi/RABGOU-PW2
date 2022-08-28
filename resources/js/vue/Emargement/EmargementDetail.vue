@@ -3,9 +3,7 @@
     <div v-if="dataLoaded">
 
         <div id="feuilleData">
-
-            <div class="row row-cols-4">
-
+            <div class="row">
                 <div class="col border">
                     Classe : <br />
                      {{ feuilleEmargement.classe.nom }}
@@ -23,10 +21,10 @@
                     Enseignant : <br />
                     {{ feuilleEmargement.enseignant.civ }}&nbsp{{ feuilleEmargement.enseignant.nom }}
                 </div>
-
-
             </div>
-
+            <div class="row">
+                <button class="btn btn-primary" @click="getFeuilleEmargement">Rafraîchir la liste</button>
+            </div>
         </div>
 
 
@@ -47,17 +45,22 @@
                 <td>{{ eleve.nom }}</td>
                 <td>{{ eleve.prenom }}</td>
                 <td class="">
-                    <div class="btn-group" role="group">
-                        <label for="elevePresent">Présent ?</label>
-                        <input id="elevePresent" type="checkbox" class="btn btn-primary"
-                            @change="present">
+                    <div class="form-check">
+                        <input id="elevePresent" type="checkbox" class="form-check-input"
+                            @change="elevePresent(eleve.id)"
+                            :disabled="eleve.statut_signature === 2"
+                            :checked="eleve.statut_signature === 2"
+                        >
+                        <label for="elevePresent" class="form-check-label">Présent ?</label>
                     </div>
                     &nbsp
-                    <div class="btn-group" role="group">
-                        <label for="signatureEleve">Signature de l'élève</label>
-                        <input id="signatureEleve" type="checkbox" class="btn btn-primary"
-                               :value="eleve.statut_signature === 1 || eleve.statut_signature === 3"
+                    <div class="form-check">
+                        <input id="signatureEleve" type="checkbox" class="form-check-input"
+                               :value="eleve.statut_signature !== 0"
+                               :checked="eleve.statut_signature !== 0"
+                               disabled
                         >
+                        <label for="signatureEleve" class="form-check-label">Signature de l'élève</label>
 
                     </div>
                 </td>
@@ -85,17 +88,25 @@ export default {
         }
     },
     created() {
-        this.axios
-            .get('http://localhost/RABGOU-PW2/public/emargement/' + this.feuilleId)
-            .then(response => {
-                this.feuilleEmargement = response.data;
-                this.dataLoaded = true;
-            })
+       this.getFeuilleEmargement()
 
     },
     methods: {
         elevePresent(id) {
-
+            this.axios
+                .get('http://localhost/RABGOU-PW2/public/emargement/' + this.feuilleId)
+                .then(response => {
+                    this.feuilleEmargement = response.data;
+                    this.dataLoaded = true;
+                })
+        },
+        getFeuilleEmargement() {
+            this.axios
+                .get('http://localhost/RABGOU-PW2/public/emargement/' + this.feuilleId)
+                .then(response => {
+                    this.feuilleEmargement = response.data;
+                    this.dataLoaded = true;
+                })
         }
     }
 

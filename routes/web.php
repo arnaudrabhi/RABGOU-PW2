@@ -111,6 +111,10 @@ Route::get('/emargement/{id}', function($id) {
     $controller = new EmargementController();
     return $controller->getFeuilleData($id);
 });
+Route::get('/emargement/{idfeuille}/presence/{ideleve}', function($idfeuille, $ideleve) {
+    $controller = new EmargementController();
+    return $controller->setElevePresence($idfeuille, $ideleve);
+});
 
 
 
