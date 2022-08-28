@@ -47,13 +47,12 @@
                 <td class="">
                     <div class="form-check">
                         <input id="elevePresent" type="checkbox" class="form-check-input"
-                            @change="elevePresent(eleve.id)"
-                            :disabled="eleve.statut_signature === 2"
-                            :checked="eleve.statut_signature === 2"
+                            @click="elevePresent(eleve.id)"
+                            :disabled="eleve.statut_signature === 3"
+                            :checked="eleve.statut_signature === 3"
                         >
                         <label for="elevePresent" class="form-check-label">Présent ?</label>
                     </div>
-                    &nbsp
                     <div class="form-check">
                         <input id="signatureEleve" type="checkbox" class="form-check-input"
                                :value="eleve.statut_signature !== 0"
@@ -94,11 +93,8 @@ export default {
     methods: {
         elevePresent(id) {
             this.axios
-                .get('http://localhost/RABGOU-PW2/public/emargement/' + this.feuilleId)
-                .then(response => {
-                    this.feuilleEmargement = response.data;
-                    this.dataLoaded = true;
-                })
+                .get('http://localhost/RABGOU-PW2/public/emargement/' + this.feuilleId + '/presence/' + id)
+            this.getFeuilleEmargement()
         },
         getFeuilleEmargement() {
             this.axios

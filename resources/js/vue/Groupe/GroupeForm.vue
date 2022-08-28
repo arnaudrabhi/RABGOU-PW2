@@ -1,6 +1,6 @@
 <template>
     <div class="container-sm align-content-center shadow-lg p-3 mb-5 bg-body rounded">
-        <h3 class="text-center">Ajouter un élève</h3>
+        <h3 class="text-center">Ajouter un groupe</h3>
         <div>
                 <form @submit.prevent="sendPost">
 
@@ -41,7 +41,7 @@
                         <SelectItem v-model:value="form.classe_id" :values="classes" class="form-control" required/>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Ajouter élève</button>
+                    <button type="submit" class="btn btn-primary">Ajouter groupe</button>
                 </form>
 
         </div>
@@ -51,12 +51,12 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="messageModalLabel">Enregistrement de l'élève</h5>
+                        <h5 class="modal-title" id="messageModalLabel">Enregistrement de l'groupe</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.eleve.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
-                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'élève. Massage : {{error}}</p>
+                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.groupe.user_id" class="text-success"> L'groupe {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
+                        <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'groupe. Massage : {{error}}</p>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Ok</button>
@@ -71,7 +71,7 @@
 import SelectItem from '../Commun/SelectItem.vue'
 
 export default {
-    props: ['editEleve', 'eleve', 'classes'],
+    props: ['editgroupe', 'groupe', 'classes'],
 
     components: {
         SelectItem
@@ -88,11 +88,11 @@ export default {
 
     created() {
         this.form = {
-            civ: this.eleve.civ,
-            nom: this.eleve.nom,
-            prenom: this.eleve.prenom,
-            email: this.eleve.email,
-            classe_id: this.eleve.classe_id
+            civ: this.groupe.civ,
+            nom: this.groupe.nom,
+            prenom: this.groupe.prenom,
+            email: this.groupe.email,
+            classe_id: this.groupe.classe_id
         }
     },
 
@@ -100,15 +100,15 @@ export default {
 
         sendPost() {
             this.error = '';
-            if (this.editEleve) {
-                this.editPost(this.eleve.id)
-            } else {
+            if (this.editgroupe) {
                 this.addPost();
+            } else {
+                this.editPost(this.groupe.id)
             }
         },
         addPost() {
             this.axios
-                .put('http://localhost/RABGOU-PW2/public/eleves/add', this.form)
+                .put('http://localhost/RABGOU-PW2/public/groupes/add', this.form)
                 .then(response => (
                     console.log(response.data, this.response = response)
                 ))
@@ -118,7 +118,7 @@ export default {
         },
         editPost(id) {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/eleves/update/'+id, this.form)
+                .post('http://localhost/RABGOU-PW2/public/groupes/update/'+id, this.form)
                 .then(response => (
                     console.log(response.data.ok)
                 ))

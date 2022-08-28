@@ -40,24 +40,20 @@ class EmargementController extends Controller
         // Si le statut signature n'existe pas encore, on ajoute le statut_signature 0 à l'élève
         // Sinon, on ajoute le statut de la signature
         foreach ($eleves as $eleve) {
-            $signature = SignatureFeuilleEmargement::query()
-                ->where('feuille_emargement_id', '=', $feuille->id)
-                ->where('eleve_user_id', '=', $eleve->id)
-                ->first();
+                $signature = SignatureFeuilleEmargement::firstOrCreate([
+                    'feuille_emargement_id' => $feuille->id,
+                    'eleve_user_id' => $eleve->user_id
+                ], [
+                    'statut' => 0
+                ]);
 
-            if ($signature == null) {
-                $elevesArray[] = array_merge(
-                    $eleve->toArray(),
-                    ['statut_signature' => '0'],
-                    $eleve->user->toArray()
-                );
-            } else {
-                $elevesArray[] = array_merge(
-                    $eleve->toArray(),
-                    ['statut_signature' => $signature->statut],
-                    $eleve->user->toArray()
-                );
-            }
+
+
+            $elevesArray[] = array_merge(
+                $eleve->toArray(),
+                ['statut_signature' => $signature->statut],
+                $eleve->user->toArray()
+            );
         }
 
         return array_merge(

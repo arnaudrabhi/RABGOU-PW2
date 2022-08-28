@@ -55,7 +55,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.eleve.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
+                        <p v-if="response && response.data && response.data.user && response.data.user.nom && response.data.user.prenom && response.data.classe.user_id" class="text-success"> L'élève {{response.data.user.nom}} {{response.data.user.prenom}} à été enregistré avec succès</p>
                         <p v-if="error"> Une erreur c'est produite lors de l'enregistrement de l'élève. Massage : {{error}}</p>
                     </div>
                     <div class="modal-footer">
@@ -71,7 +71,7 @@
 import SelectItem from '../Commun/SelectItem.vue'
 
 export default {
-    props: ['editEleve', 'eleve', 'classes'],
+    props: ['editclasse', 'classe', 'classes'],
 
     components: {
         SelectItem
@@ -88,11 +88,11 @@ export default {
 
     created() {
         this.form = {
-            civ: this.eleve.civ,
-            nom: this.eleve.nom,
-            prenom: this.eleve.prenom,
-            email: this.eleve.email,
-            classe_id: this.eleve.classe_id
+            civ: this.classe.civ,
+            nom: this.classe.nom,
+            prenom: this.classe.prenom,
+            email: this.classe.email,
+            classe_id: this.classe.classe_id
         }
     },
 
@@ -100,15 +100,15 @@ export default {
 
         sendPost() {
             this.error = '';
-            if (this.editEleve) {
-                this.editPost(this.eleve.id)
-            } else {
+            if (this.editclasse) {
                 this.addPost();
+            } else {
+                this.editPost(this.classe.id)
             }
         },
         addPost() {
             this.axios
-                .put('http://localhost/RABGOU-PW2/public/eleves/add', this.form)
+                .put('http://localhost/RABGOU-PW2/public/classes/add', this.form)
                 .then(response => (
                     console.log(response.data, this.response = response)
                 ))
@@ -118,7 +118,7 @@ export default {
         },
         editPost(id) {
             this.axios
-                .post('http://localhost/RABGOU-PW2/public/eleves/update/'+id, this.form)
+                .post('http://localhost/RABGOU-PW2/public/classes/update/'+id, this.form)
                 .then(response => (
                     console.log(response.data.ok)
                 ))

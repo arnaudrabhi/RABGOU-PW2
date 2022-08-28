@@ -25,6 +25,14 @@
         <div id="EnseignantView" v-else-if="this.showEnseignant">
             <enseignant-view></enseignant-view>
         </div>
+
+        <div id="ClasseView" v-else-if="this.showClasse">
+            <classe-view></classe-view>
+        </div>
+
+        <div id="GroupeView" v-else-if="this.showGroupe">
+            <groupe-view></groupe-view>
+        </div>
     </div>
 
 

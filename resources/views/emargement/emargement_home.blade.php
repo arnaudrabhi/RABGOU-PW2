@@ -13,7 +13,7 @@ $connectedUser = Auth::user();
 @section('content')
     <br />
     <br />
-    <div class="row mt-10">
+    <div class="row">
         <div id="EmargementView">
             <emargement-view>
             </emargement-view>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth as Auth;
         switch ($userAuth->role) {
             // TODO : Choisir les couleurs
             case "1":
-                $color = "#d14747";
+                $color = "#E76A58";
                 break;
             case "2":
                 $color = "orange";
